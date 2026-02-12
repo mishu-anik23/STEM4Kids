@@ -1,5 +1,5 @@
-const { Achievement } = require('../src/models');
-const { sequelize } = require('../src/config/database');
+const { Achievement } = require('../../src/models');
+const { sequelize } = require('../../src/config/database');
 
 const achievements = [
   {
@@ -197,11 +197,10 @@ async function seedAchievements() {
     }
 
     console.log(`✅ Successfully seeded ${achievements.length} achievements`);
-    process.exit(0);
   } catch (error) {
     console.error('❌ Seeding failed:', error);
-    process.exit(1);
+    throw error;
   }
 }
 
-seedAchievements();
+module.exports = seedAchievements;
