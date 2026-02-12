@@ -1,0 +1,132 @@
+{
+  "topics": [
+    {
+      "id": "topic_w1_shadows",
+      "islandId": "island_w1_physics",
+      "code": "shadows_and_light",
+      "name": "Shadows & Light",
+      "description": "Learn how shadows form and change with light!",
+      "learningObjectives": [
+        "Understand that shadows are made when light is blocked",
+        "Predict shadow size based on light distance",
+        "Identify different light sources"
+      ],
+      "orderIndex": 1,
+      "iconUrl": "assets/images/topics/shadow_detective.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_forces",
+      "islandId": "island_w1_physics",
+      "code": "push_and_pull",
+      "name": "Push & Pull Forces",
+      "description": "Explore how things move with pushing and pulling!",
+      "learningObjectives": [
+        "Understand the difference between push and pull",
+        "Identify forces in everyday activities",
+        "Predict how objects move with different forces"
+      ],
+      "orderIndex": 2,
+      "iconUrl": "assets/images/topics/playground_heroes.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_states",
+      "islandId": "island_w1_chemistry",
+      "code": "solids_vs_liquids",
+      "name": "Solids vs Liquids",
+      "description": "Discover the difference between solids and liquids!",
+      "learningObjectives": [
+        "Identify solids and liquids in everyday life",
+        "Understand properties of solids (keep shape)",
+        "Understand properties of liquids (flow and take shape)"
+      ],
+      "orderIndex": 1,
+      "iconUrl": "assets/images/topics/state_explorers.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_materials",
+      "islandId": "island_w1_chemistry",
+      "code": "materials_around_us",
+      "name": "Materials Around Us",
+      "description": "Explore different materials like wood, metal, and plastic!",
+      "learningObjectives": [
+        "Identify common materials (wood, metal, plastic, glass)",
+        "Understand material properties (hard/soft, rough/smooth)",
+        "Match materials to their uses"
+      ],
+      "orderIndex": 2,
+      "iconUrl": "assets/images/topics/building_brigade.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_number_bonds",
+      "islandId": "island_w1_math",
+      "code": "number_bonds_10",
+      "name": "Number Bonds to 10",
+      "description": "Master number pairs that make 10!",
+      "learningObjectives": [
+        "Recognize number pairs that sum to 10",
+        "Use number bonds for quick mental math",
+        "Apply number bonds to solve simple problems"
+      ],
+      "orderIndex": 1,
+      "iconUrl": "assets/images/topics/treasure_pairs.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_addition",
+      "islandId": "island_w1_math",
+      "code": "simple_addition",
+      "name": "Simple Addition",
+      "description": "Learn to add numbers up to 20!",
+      "learningObjectives": [
+        "Add single-digit numbers",
+        "Understand addition as combining quantities",
+        "Solve simple word problems with addition"
+      ],
+      "orderIndex": 2,
+      "iconUrl": "assets/images/topics/beach_counting.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_plants",
+      "islandId": "island_w1_nature",
+      "code": "plants_and_growth",
+      "name": "Plants & Growth",
+      "description": "Discover how plants grow and what they need!",
+      "learningObjectives": [
+        "Identify parts of a plant (roots, stem, leaves, flower)",
+        "Understand what plants need to grow (water, light, air)",
+        "Observe plant life cycles"
+      ],
+      "orderIndex": 1,
+      "iconUrl": "assets/images/topics/garden_guardians.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    },
+    {
+      "id": "topic_w1_seasons",
+      "islandId": "island_w1_nature",
+      "code": "seasons_and_weather",
+      "name": "Seasons",
+      "description": "Explore the four seasons and weather patterns!",
+      "learningObjectives": [
+        "Identify the four seasons (spring, summer, fall, winter)",
+        "Recognize weather patterns in each season",
+        "Understand how seasons affect nature"
+      ],
+      "orderIndex": 2,
+      "iconUrl": "assets/images/topics/weather_wizards.png",
+      "difficultyLevel": "beginner",
+      "levelCount": 8
+    }
+  ]
+}

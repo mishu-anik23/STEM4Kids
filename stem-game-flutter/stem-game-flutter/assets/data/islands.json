@@ -1,0 +1,58 @@
+{
+  "islands": [
+    {
+      "id": "island_w1_physics",
+      "code": "world_1_physics",
+      "worldId": 1,
+      "name": "Physics Island",
+      "description": "Explore the wonders of light, shadows, and forces!",
+      "topicCategory": "physics",
+      "orderIndex": 1,
+      "iconUrl": "assets/images/islands/physics_island.png",
+      "unlockRequirements": null,
+      "isActive": true
+    },
+    {
+      "id": "island_w1_chemistry",
+      "code": "world_1_chemistry",
+      "worldId": 1,
+      "name": "Materials Island",
+      "description": "Discover different materials and their properties!",
+      "topicCategory": "chemistry",
+      "orderIndex": 2,
+      "iconUrl": "assets/images/islands/materials_island.png",
+      "unlockRequirements": {
+        "previousIsland": "world_1_physics",
+        "minStars": 10
+      },
+      "isActive": true
+    },
+    {
+      "id": "island_w1_math",
+      "code": "world_1_math",
+      "worldId": 1,
+      "name": "Math Island",
+      "description": "Master numbers, counting, and simple arithmetic!",
+      "topicCategory": "math",
+      "orderIndex": 3,
+      "iconUrl": "assets/images/islands/math_island.png",
+      "unlockRequirements": null,
+      "isActive": true
+    },
+    {
+      "id": "island_w1_nature",
+      "code": "world_1_nature",
+      "worldId": 1,
+      "name": "Nature Island",
+      "description": "Learn about plants, animals, and the natural world!",
+      "topicCategory": "nature",
+      "orderIndex": 4,
+      "iconUrl": "assets/images/islands/nature_island.png",
+      "unlockRequirements": {
+        "previousIsland": "world_1_math",
+        "minStars": 10
+      },
+      "isActive": true
+    }
+  ]
+}
