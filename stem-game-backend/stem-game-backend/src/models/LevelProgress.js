@@ -82,6 +82,54 @@ const LevelProgress = sequelize.define('LevelProgress', {
   coinsEarned: {
     type: DataTypes.INTEGER,
     defaultValue: 0
+  },
+  // Phase 1: Island/Topic Structure
+  islandId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'islands',
+      key: 'id'
+    },
+    onDelete: 'SET NULL',
+    comment: 'Foreign key to the island (nullable for migration)'
+  },
+  topicId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'topics',
+      key: 'id'
+    },
+    onDelete: 'SET NULL',
+    comment: 'Foreign key to the topic (nullable for migration)'
+  },
+  xpEarned: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0
+    },
+    comment: 'XP earned for completing this level'
+  },
+  masteryLevel: {
+    type: DataTypes.ENUM('not_started', 'learning', 'practicing', 'mastered'),
+    allowNull: false,
+    defaultValue: 'not_started',
+    comment: 'Mastery level for this specific level'
+  },
+  firstTryBonus: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    comment: 'Whether user completed on first attempt (bonus XP)'
+  },
+  noHintsBonus: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    comment: 'Whether user completed without using hints (bonus XP)'
   }
 }, {
   tableName: 'level_progress',
@@ -95,6 +143,12 @@ const LevelProgress = sequelize.define('LevelProgress', {
     },
     {
       fields: ['world_id', 'level_id']
+    },
+    {
+      fields: ['island_id']
+    },
+    {
+      fields: ['topic_id']
     }
   ]
 });

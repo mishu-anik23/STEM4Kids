@@ -96,6 +96,40 @@ const User = sequelize.define('User', {
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
+  },
+  // Phase 1: XP and Island Structure
+  totalXp: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0
+    },
+    comment: 'Total XP earned across all levels and topics'
+  },
+  weeklyStars: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0
+    },
+    comment: 'Stars earned this week (resets every Monday)'
+  },
+  weeklyStarsResetAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: 'Timestamp of last weekly stars reset (used for weekly leaderboard)'
+  },
+  currentIslandId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'islands',
+      key: 'id'
+    },
+    onDelete: 'SET NULL',
+    comment: 'Foreign key to the island user is currently on (nullable)'
   }
 }, {
   tableName: 'users',
