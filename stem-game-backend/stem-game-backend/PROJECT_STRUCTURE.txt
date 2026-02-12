@@ -1,0 +1,41 @@
+STEM GAME BACKEND - Complete File Structure
+============================================
+
+stem-game-backend/
+├── package.json                        ✅ Dependencies & scripts
+├── .env.example                        ✅ Environment variables template
+├── README.md                           ✅ Backend documentation
+│
+├── src/
+│   ├── server.js                       ✅ Main Express server + Socket.io
+│   │
+│   ├── config/
+│   │   ├── database.js                 ✅ PostgreSQL Sequelize config
+│   │   └── redis.js                    ✅ Redis config + leaderboard helpers
+│   │
+│   ├── models/
+│   │   ├── User.js                     ✅ User model with auth
+│   │   ├── LevelProgress.js            ✅ Progress tracking model
+│   │   ├── Achievement.js              ✅ Achievement models
+│   │   └── index.js                    ✅ Model associations
+│   │
+│   ├── controllers/
+│   │   ├── authController.js           ✅ Register, login, logout, refresh token
+│   │   ├── progressController.js       ✅ Level completion, progress tracking
+│   │   └── leaderboardController.js    ✅ Global, weekly, grade leaderboards
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js               ✅ Auth endpoints
+│   │   ├── progressRoutes.js           ✅ Progress endpoints
+│   │   └── leaderboardRoutes.js        ✅ Leaderboard endpoints
+│   │
+│   └── middleware/
+│       ├── auth.js                     ✅ JWT authentication
+│       └── validation.js               ✅ Input validation with express-validator
+│
+└── database/
+    ├── migrate.js                      ✅ Migration script
+    └── seeds/
+        └── achievements.js             ✅ Seed 15 achievements
+
+Total: 18 JavaScript files - ALL COMPLETE AND WORKING
