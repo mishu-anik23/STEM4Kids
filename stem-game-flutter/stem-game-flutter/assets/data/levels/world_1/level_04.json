@@ -1,0 +1,144 @@
+{
+  "levelId": 4,
+  "worldId": 1,
+  "title": "Coconut Collection",
+  "description": "Add bigger numbers together!",
+  "difficulty": "medium",
+  "theme": "coconut",
+  "mathType": "addition",
+  "targetGrade": [2],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l4q1",
+      "type": "multiple_choice",
+      "questionText": "8 + 5 = ?",
+      "correctAnswer": "13",
+      "options": ["13", "12", "14", "3"],
+      "explanation": "8 plus 5 equals 13!",
+      "hints": [
+        {"level": 1, "text": "8 + 2 = 10, then add 3 more"},
+        {"level": 2, "text": "Think: 8 + 5 = 10 + 3"},
+        {"level": 3, "text": "The answer is 13", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q2",
+      "type": "multiple_choice",
+      "questionText": "7 + 6 = ?",
+      "correctAnswer": "13",
+      "options": ["13", "12", "14", "1"],
+      "explanation": "7 plus 6 is 13!",
+      "hints": [
+        {"level": 1, "text": "7 + 3 = 10, then add 3 more"},
+        {"level": 2, "text": "Think: 7 + 6 = 10 + 3"},
+        {"level": 3, "text": "The answer is 13", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q3",
+      "type": "multiple_choice",
+      "questionText": "9 + 4 = ?",
+      "correctAnswer": "13",
+      "options": ["13", "12", "14", "5"],
+      "explanation": "9 plus 4 equals 13!",
+      "hints": [
+        {"level": 1, "text": "9 + 1 = 10, then add 3 more"},
+        {"level": 2, "text": "Think: 9 + 4 = 10 + 3"},
+        {"level": 3, "text": "The answer is 13", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q4",
+      "type": "multiple_choice",
+      "questionText": "6 + 8 = ?",
+      "correctAnswer": "14",
+      "options": ["14", "13", "15", "2"],
+      "explanation": "6 plus 8 is 14!",
+      "hints": [
+        {"level": 1, "text": "6 + 4 = 10, then add 4 more"},
+        {"level": 2, "text": "Think: 6 + 8 = 10 + 4"},
+        {"level": 3, "text": "The answer is 14", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q5",
+      "type": "multiple_choice",
+      "questionText": "7 + 9 = ?",
+      "correctAnswer": "16",
+      "options": ["16", "15", "17", "2"],
+      "explanation": "7 plus 9 equals 16!",
+      "hints": [
+        {"level": 1, "text": "7 + 3 = 10, then add 6 more"},
+        {"level": 2, "text": "Think: 7 + 9 = 10 + 6"},
+        {"level": 3, "text": "The answer is 16", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q6",
+      "type": "multiple_choice",
+      "questionText": "8 + 7 = ?",
+      "correctAnswer": "15",
+      "options": ["15", "14", "16", "1"],
+      "explanation": "8 plus 7 is 15!",
+      "hints": [
+        {"level": 1, "text": "8 + 2 = 10, then add 5 more"},
+        {"level": 2, "text": "Think: 8 + 7 = 10 + 5"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q7",
+      "type": "multiple_choice",
+      "questionText": "9 + 8 = ?",
+      "correctAnswer": "17",
+      "options": ["17", "16", "18", "1"],
+      "explanation": "9 plus 8 equals 17!",
+      "hints": [
+        {"level": 1, "text": "9 + 1 = 10, then add 7 more"},
+        {"level": 2, "text": "Think: 9 + 8 = 10 + 7"},
+        {"level": 3, "text": "The answer is 17", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q8",
+      "type": "multiple_choice",
+      "questionText": "6 + 9 = ?",
+      "correctAnswer": "15",
+      "options": ["15", "14", "16", "3"],
+      "explanation": "6 plus 9 is 15!",
+      "hints": [
+        {"level": 1, "text": "6 + 4 = 10, then add 5 more"},
+        {"level": 2, "text": "Think: 6 + 9 = 10 + 5"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q9",
+      "type": "multiple_choice",
+      "questionText": "7 + 7 = ?",
+      "correctAnswer": "14",
+      "options": ["14", "13", "15", "0"],
+      "explanation": "7 plus 7 equals 14!",
+      "hints": [
+        {"level": 1, "text": "Double 7 is..."},
+        {"level": 2, "text": "7 + 7 = 14"},
+        {"level": 3, "text": "The answer is 14", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l4q10",
+      "type": "multiple_choice",
+      "questionText": "9 + 9 = ?",
+      "correctAnswer": "18",
+      "options": ["18", "17", "19", "0"],
+      "explanation": "9 plus 9 is 18!",
+      "hints": [
+        {"level": 1, "text": "Double 9 is..."},
+        {"level": 2, "text": "9 + 9 = 18"},
+        {"level": 3, "text": "The answer is 18", "showsAnswer": true}
+      ]
+    }
+  ]
+}

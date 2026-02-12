@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'core/di/service_locator.dart';
 import 'core/routes/app_router.dart';
 import 'core/themes/app_theme.dart';
 import 'features/auth/bloc/auth_bloc.dart';
 import 'features/progress/bloc/progress_bloc.dart';
 import 'features/leaderboard/bloc/leaderboard_bloc.dart';
+import 'features/game/bloc/game_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +38,7 @@ class StemLearningGame extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AuthBloc>()),
         BlocProvider(create: (context) => getIt<ProgressBloc>()),
         BlocProvider(create: (context) => getIt<LeaderboardBloc>()),
+        BlocProvider(create: (context) => getIt<GameBloc>()),
       ],
       child: MaterialApp.router(
         title: 'STEM Learning Game',

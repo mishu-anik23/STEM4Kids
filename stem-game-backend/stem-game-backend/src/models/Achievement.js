@@ -80,7 +80,7 @@ const UserAchievement = sequelize.define('UserAchievement', {
   indexes: [
     {
       unique: true,
-      fields: ['userId', 'achievementId']
+      fields: ['user_id', 'achievement_id']
     }
   ]
 });

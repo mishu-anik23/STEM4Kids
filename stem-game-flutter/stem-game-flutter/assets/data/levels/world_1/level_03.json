@@ -1,0 +1,134 @@
+{
+  "levelId": 3,
+  "worldId": 1,
+  "title": "Island Adventure",
+  "description": "Mix it up with addition and subtraction!",
+  "difficulty": "easy",
+  "theme": "island",
+  "mathType": "mixed",
+  "targetGrade": [1, 2],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l3q1",
+      "type": "fill_in_blank",
+      "questionText": "4 + 3 = ?",
+      "correctAnswer": "7",
+      "explanation": "4 plus 3 equals 7!",
+      "hints": [
+        {"level": 1, "text": "Count up from 4"},
+        {"level": 2, "text": "4... 5, 6, 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q2",
+      "type": "fill_in_blank",
+      "questionText": "9 - 2 = ?",
+      "correctAnswer": "7",
+      "explanation": "9 minus 2 is 7!",
+      "hints": [
+        {"level": 1, "text": "Count back 2 from 9"},
+        {"level": 2, "text": "9... 8, 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q3",
+      "type": "fill_in_blank",
+      "questionText": "2 + 6 = ?",
+      "correctAnswer": "8",
+      "explanation": "2 plus 6 equals 8!",
+      "hints": [
+        {"level": 1, "text": "Start at 2, add 6"},
+        {"level": 2, "text": "2... 3, 4, 5, 6, 7, 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q4",
+      "type": "fill_in_blank",
+      "questionText": "10 - 4 = ?",
+      "correctAnswer": "6",
+      "explanation": "10 minus 4 is 6!",
+      "hints": [
+        {"level": 1, "text": "Take away 4 from 10"},
+        {"level": 2, "text": "10... 9, 8, 7, 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q5",
+      "type": "fill_in_blank",
+      "questionText": "5 + 5 = ?",
+      "correctAnswer": "10",
+      "explanation": "5 plus 5 equals 10!",
+      "hints": [
+        {"level": 1, "text": "Double 5 is..."},
+        {"level": 2, "text": "5 + 5 makes 10"},
+        {"level": 3, "text": "The answer is 10", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q6",
+      "type": "fill_in_blank",
+      "questionText": "8 - 3 = ?",
+      "correctAnswer": "5",
+      "explanation": "8 minus 3 equals 5!",
+      "hints": [
+        {"level": 1, "text": "Count back 3 from 8"},
+        {"level": 2, "text": "8... 7, 6, 5"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q7",
+      "type": "fill_in_blank",
+      "questionText": "3 + 5 = ?",
+      "correctAnswer": "8",
+      "explanation": "3 plus 5 is 8!",
+      "hints": [
+        {"level": 1, "text": "Start at 3, add 5"},
+        {"level": 2, "text": "3... 4, 5, 6, 7, 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q8",
+      "type": "fill_in_blank",
+      "questionText": "7 - 1 = ?",
+      "correctAnswer": "6",
+      "explanation": "7 minus 1 equals 6!",
+      "hints": [
+        {"level": 1, "text": "Just one less than 7"},
+        {"level": 2, "text": "7 - 1 = 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q9",
+      "type": "fill_in_blank",
+      "questionText": "6 + 2 = ?",
+      "correctAnswer": "8",
+      "explanation": "6 plus 2 is 8!",
+      "hints": [
+        {"level": 1, "text": "Count up 2 from 6"},
+        {"level": 2, "text": "6... 7, 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l3q10",
+      "type": "fill_in_blank",
+      "questionText": "9 - 5 = ?",
+      "correctAnswer": "4",
+      "explanation": "9 minus 5 equals 4!",
+      "hints": [
+        {"level": 1, "text": "Take away 5 from 9"},
+        {"level": 2, "text": "9... 8, 7, 6, 5, 4"},
+        {"level": 3, "text": "The answer is 4", "showsAnswer": true}
+      ]
+    }
+  ]
+}

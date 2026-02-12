@@ -1,0 +1,144 @@
+{
+  "levelId": 2,
+  "worldId": 1,
+  "title": "Treasure Hunt",
+  "description": "Learn to subtract numbers!",
+  "difficulty": "easy",
+  "theme": "treasure",
+  "mathType": "subtraction",
+  "targetGrade": [1, 2],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l2q1",
+      "type": "multiple_choice",
+      "questionText": "5 - 2 = ?",
+      "correctAnswer": "3",
+      "options": ["3", "2", "4", "7"],
+      "explanation": "5 minus 2 equals 3!",
+      "hints": [
+        {"level": 1, "text": "Start with 5, take away 2"},
+        {"level": 2, "text": "5... 4, 3"},
+        {"level": 3, "text": "The answer is 3", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q2",
+      "type": "multiple_choice",
+      "questionText": "8 - 3 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "4", "6", "11"],
+      "explanation": "8 minus 3 is 5!",
+      "hints": [
+        {"level": 1, "text": "Count back 3 from 8"},
+        {"level": 2, "text": "8... 7, 6, 5"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q3",
+      "type": "multiple_choice",
+      "questionText": "7 - 4 = ?",
+      "correctAnswer": "3",
+      "options": ["3", "2", "4", "11"],
+      "explanation": "7 minus 4 equals 3!",
+      "hints": [
+        {"level": 1, "text": "Take away 4 from 7"},
+        {"level": 2, "text": "7... 6, 5, 4, 3"},
+        {"level": 3, "text": "The answer is 3", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q4",
+      "type": "multiple_choice",
+      "questionText": "9 - 1 = ?",
+      "correctAnswer": "8",
+      "options": ["8", "7", "9", "10"],
+      "explanation": "9 minus 1 is 8!",
+      "hints": [
+        {"level": 1, "text": "Just one less than 9"},
+        {"level": 2, "text": "9... 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q5",
+      "type": "multiple_choice",
+      "questionText": "6 - 3 = ?",
+      "correctAnswer": "3",
+      "options": ["3", "2", "4", "9"],
+      "explanation": "6 minus 3 equals 3!",
+      "hints": [
+        {"level": 1, "text": "Half of 6 is..."},
+        {"level": 2, "text": "6... 5, 4, 3"},
+        {"level": 3, "text": "The answer is 3", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q6",
+      "type": "multiple_choice",
+      "questionText": "10 - 5 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "4", "6", "15"],
+      "explanation": "10 minus 5 is 5!",
+      "hints": [
+        {"level": 1, "text": "Half of 10 is..."},
+        {"level": 2, "text": "Count back 5 from 10"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q7",
+      "type": "multiple_choice",
+      "questionText": "8 - 4 = ?",
+      "correctAnswer": "4",
+      "options": ["4", "3", "5", "12"],
+      "explanation": "8 minus 4 equals 4!",
+      "hints": [
+        {"level": 1, "text": "Half of 8 is..."},
+        {"level": 2, "text": "8... 7, 6, 5, 4"},
+        {"level": 3, "text": "The answer is 4", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q8",
+      "type": "multiple_choice",
+      "questionText": "7 - 2 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "4", "6", "9"],
+      "explanation": "7 minus 2 is 5!",
+      "hints": [
+        {"level": 1, "text": "Take away 2 from 7"},
+        {"level": 2, "text": "7... 6, 5"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q9",
+      "type": "multiple_choice",
+      "questionText": "9 - 6 = ?",
+      "correctAnswer": "3",
+      "options": ["3", "2", "4", "15"],
+      "explanation": "9 minus 6 equals 3!",
+      "hints": [
+        {"level": 1, "text": "Count back 6 from 9"},
+        {"level": 2, "text": "9... 8, 7, 6, 5, 4, 3"},
+        {"level": 3, "text": "The answer is 3", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l2q10",
+      "type": "multiple_choice",
+      "questionText": "10 - 3 = ?",
+      "correctAnswer": "7",
+      "options": ["7", "6", "8", "13"],
+      "explanation": "10 minus 3 is 7!",
+      "hints": [
+        {"level": 1, "text": "Start at 10, count back 3"},
+        {"level": 2, "text": "10... 9, 8, 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "levelId": 7,
+  "worldId": 1,
+  "title": "Island Market",
+  "description": "Solve story problems about the island!",
+  "difficulty": "medium",
+  "theme": "market",
+  "mathType": "word_problems",
+  "targetGrade": [2, 3],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l7q1",
+      "type": "word_problem",
+      "questionText": "You find 7 seashells and your friend finds 5 more. How many seashells do you have together?",
+      "correctAnswer": "12",
+      "options": ["12", "11", "13", "2"],
+      "explanation": "7 + 5 = 12 seashells!",
+      "hints": [
+        {"level": 1, "text": "Add the seashells together: 7 + 5"},
+        {"level": 2, "text": "7 + 5 = ?"},
+        {"level": 3, "text": "The answer is 12", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q2",
+      "type": "word_problem",
+      "questionText": "There are 15 coconuts. You eat 4. How many are left?",
+      "correctAnswer": "11",
+      "options": ["11", "10", "12", "19"],
+      "explanation": "15 - 4 = 11 coconuts left!",
+      "hints": [
+        {"level": 1, "text": "Subtract: 15 - 4"},
+        {"level": 2, "text": "15 - 4 = ?"},
+        {"level": 3, "text": "The answer is 11", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q3",
+      "type": "word_problem",
+      "questionText": "You catch 6 fish in the morning and 8 fish in the afternoon. How many fish in total?",
+      "correctAnswer": "14",
+      "options": ["14", "13", "15", "2"],
+      "explanation": "6 + 8 = 14 fish total!",
+      "hints": [
+        {"level": 1, "text": "Add the fish together: 6 + 8"},
+        {"level": 2, "text": "6 + 8 = ?"},
+        {"level": 3, "text": "The answer is 14", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q4",
+      "type": "word_problem",
+      "questionText": "You have 20 coins and spend 7 on a snack. How many coins do you have now?",
+      "correctAnswer": "13",
+      "options": ["13", "12", "14", "27"],
+      "explanation": "20 - 7 = 13 coins left!",
+      "hints": [
+        {"level": 1, "text": "Subtract: 20 - 7"},
+        {"level": 2, "text": "20 - 7 = ?"},
+        {"level": 3, "text": "The answer is 13", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q5",
+      "type": "word_problem",
+      "questionText": "3 birds sit on a tree. 5 more birds join them. How many birds are there?",
+      "correctAnswer": "8",
+      "options": ["8", "7", "9", "2"],
+      "explanation": "3 + 5 = 8 birds!",
+      "hints": [
+        {"level": 1, "text": "Add the birds: 3 + 5"},
+        {"level": 2, "text": "3 + 5 = ?"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q6",
+      "type": "word_problem",
+      "questionText": "You collect 12 starfish but 5 wash back into the sea. How many do you have?",
+      "correctAnswer": "7",
+      "options": ["7", "6", "8", "17"],
+      "explanation": "12 - 5 = 7 starfish!",
+      "hints": [
+        {"level": 1, "text": "Subtract: 12 - 5"},
+        {"level": 2, "text": "12 - 5 = ?"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q7",
+      "type": "word_problem",
+      "questionText": "There are 9 crabs on the beach and 6 more arrive. How many crabs in total?",
+      "correctAnswer": "15",
+      "options": ["15", "14", "16", "3"],
+      "explanation": "9 + 6 = 15 crabs!",
+      "hints": [
+        {"level": 1, "text": "Add the crabs: 9 + 6"},
+        {"level": 2, "text": "9 + 6 = ?"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q8",
+      "type": "word_problem",
+      "questionText": "You pick 18 flowers and give 9 to your friend. How many flowers do you keep?",
+      "correctAnswer": "9",
+      "options": ["9", "8", "10", "27"],
+      "explanation": "18 - 9 = 9 flowers!",
+      "hints": [
+        {"level": 1, "text": "Subtract: 18 - 9"},
+        {"level": 2, "text": "Half of 18 is..."},
+        {"level": 3, "text": "The answer is 9", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q9",
+      "type": "word_problem",
+      "questionText": "You see 8 butterflies and 7 more fly by. How many butterflies did you see?",
+      "correctAnswer": "15",
+      "options": ["15", "14", "16", "1"],
+      "explanation": "8 + 7 = 15 butterflies!",
+      "hints": [
+        {"level": 1, "text": "Add them up: 8 + 7"},
+        {"level": 2, "text": "8 + 7 = ?"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l7q10",
+      "type": "word_problem",
+      "questionText": "There are 16 palm trees. 4 fall down in a storm. How many are left standing?",
+      "correctAnswer": "12",
+      "options": ["12", "11", "13", "20"],
+      "explanation": "16 - 4 = 12 palm trees!",
+      "hints": [
+        {"level": 1, "text": "Subtract: 16 - 4"},
+        {"level": 2, "text": "16 - 4 = ?"},
+        {"level": 3, "text": "The answer is 12", "showsAnswer": true}
+      ]
+    }
+  ]
+}

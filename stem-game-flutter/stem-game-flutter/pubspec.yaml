@@ -67,16 +67,4 @@ flutter:
     - assets/audio/music/
     - assets/audio/sfx/
     - assets/data/
-    - assets/fonts/
-
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
-    - family: ComicNeue
-      fonts:
-        - asset: assets/fonts/ComicNeue-Regular.ttf
-        - asset: assets/fonts/ComicNeue-Bold.ttf
-          weight: 700
+    - assets/data/levels/world_1/

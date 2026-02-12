@@ -1,0 +1,144 @@
+{
+  "levelId": 1,
+  "worldId": 1,
+  "title": "Beach Counting",
+  "description": "Let's practice adding numbers together!",
+  "difficulty": "easy",
+  "theme": "beach",
+  "mathType": "addition",
+  "targetGrade": [1, 2],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l1q1",
+      "type": "multiple_choice",
+      "questionText": "2 + 3 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "4", "6", "3"],
+      "explanation": "When you add 2 and 3 together, you get 5!",
+      "hints": [
+        {"level": 1, "text": "Try counting on your fingers: 2... 3, 4, 5"},
+        {"level": 2, "text": "Start with 2, then add 3 more"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q2",
+      "type": "multiple_choice",
+      "questionText": "1 + 4 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "3", "6", "4"],
+      "explanation": "1 plus 4 equals 5!",
+      "hints": [
+        {"level": 1, "text": "Count: 1... 2, 3, 4, 5"},
+        {"level": 2, "text": "Start at 1 and count up 4 more"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q3",
+      "type": "multiple_choice",
+      "questionText": "5 + 2 = ?",
+      "correctAnswer": "7",
+      "options": ["7", "6", "8", "5"],
+      "explanation": "5 plus 2 makes 7!",
+      "hints": [
+        {"level": 1, "text": "Start at 5, then count 2 more"},
+        {"level": 2, "text": "5... 6, 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q4",
+      "type": "multiple_choice",
+      "questionText": "3 + 3 = ?",
+      "correctAnswer": "6",
+      "options": ["6", "5", "7", "9"],
+      "explanation": "3 plus 3 equals 6!",
+      "hints": [
+        {"level": 1, "text": "Double 3 is..."},
+        {"level": 2, "text": "Count: 3... 4, 5, 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q5",
+      "type": "multiple_choice",
+      "questionText": "4 + 1 = ?",
+      "correctAnswer": "5",
+      "options": ["5", "4", "6", "3"],
+      "explanation": "4 plus 1 is 5!",
+      "hints": [
+        {"level": 1, "text": "Just one more than 4"},
+        {"level": 2, "text": "4... 5"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q6",
+      "type": "multiple_choice",
+      "questionText": "2 + 2 = ?",
+      "correctAnswer": "4",
+      "options": ["4", "3", "5", "2"],
+      "explanation": "2 plus 2 equals 4!",
+      "hints": [
+        {"level": 1, "text": "Double 2 is..."},
+        {"level": 2, "text": "2... 3, 4"},
+        {"level": 3, "text": "The answer is 4", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q7",
+      "type": "multiple_choice",
+      "questionText": "1 + 5 = ?",
+      "correctAnswer": "6",
+      "options": ["6", "5", "7", "4"],
+      "explanation": "1 plus 5 makes 6!",
+      "hints": [
+        {"level": 1, "text": "Start at 1 and count up 5"},
+        {"level": 2, "text": "1... 2, 3, 4, 5, 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q8",
+      "type": "multiple_choice",
+      "questionText": "3 + 4 = ?",
+      "correctAnswer": "7",
+      "options": ["7", "6", "8", "5"],
+      "explanation": "3 plus 4 equals 7!",
+      "hints": [
+        {"level": 1, "text": "Count on from 3: 4, 5, 6, 7"},
+        {"level": 2, "text": "3 + 4 = 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q9",
+      "type": "multiple_choice",
+      "questionText": "2 + 5 = ?",
+      "correctAnswer": "7",
+      "options": ["7", "6", "8", "9"],
+      "explanation": "2 plus 5 is 7!",
+      "hints": [
+        {"level": 1, "text": "Start at 2, count up 5"},
+        {"level": 2, "text": "2... 3, 4, 5, 6, 7"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l1q10",
+      "type": "multiple_choice",
+      "questionText": "4 + 4 = ?",
+      "correctAnswer": "8",
+      "options": ["8", "7", "9", "6"],
+      "explanation": "4 plus 4 equals 8!",
+      "hints": [
+        {"level": 1, "text": "Double 4 is..."},
+        {"level": 2, "text": "4... 5, 6, 7, 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    }
+  ]
+}

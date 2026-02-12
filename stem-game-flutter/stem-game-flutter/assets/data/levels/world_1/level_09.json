@@ -1,0 +1,144 @@
+{
+  "levelId": 9,
+  "worldId": 1,
+  "title": "Crystal Cave",
+  "description": "Find patterns with bigger numbers!",
+  "difficulty": "hard",
+  "theme": "crystal",
+  "mathType": "patterns",
+  "targetGrade": [3, 4],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l9q1",
+      "type": "drag_and_drop",
+      "questionText": "3, 6, 12, 24, ?",
+      "correctAnswer": "48",
+      "options": ["36", "40", "44", "48", "50", "52"],
+      "explanation": "The pattern is doubling! 3, 6, 12, 24, 48",
+      "hints": [
+        {"level": 1, "text": "Each number is double the last"},
+        {"level": 2, "text": "24 × 2 = ?"},
+        {"level": 3, "text": "The answer is 48", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q2",
+      "type": "drag_and_drop",
+      "questionText": "50, 45, 40, 35, ?",
+      "correctAnswer": "30",
+      "options": ["25", "28", "30", "32", "35", "40"],
+      "explanation": "The pattern is subtract 5! 50, 45, 40, 35, 30",
+      "hints": [
+        {"level": 1, "text": "The numbers go down by 5 each time"},
+        {"level": 2, "text": "35 - 5 = ?"},
+        {"level": 3, "text": "The answer is 30", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q3",
+      "type": "drag_and_drop",
+      "questionText": "2, 4, 8, 16, ?",
+      "correctAnswer": "32",
+      "options": ["20", "24", "28", "32", "36", "40"],
+      "explanation": "The pattern is doubling! 2, 4, 8, 16, 32",
+      "hints": [
+        {"level": 1, "text": "Each number is double the last"},
+        {"level": 2, "text": "16 × 2 = ?"},
+        {"level": 3, "text": "The answer is 32", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q4",
+      "type": "drag_and_drop",
+      "questionText": "100, 90, 80, 70, ?",
+      "correctAnswer": "60",
+      "options": ["50", "55", "60", "65", "70", "75"],
+      "explanation": "The pattern is subtract 10! 100, 90, 80, 70, 60",
+      "hints": [
+        {"level": 1, "text": "The numbers go down by 10 each time"},
+        {"level": 2, "text": "70 - 10 = ?"},
+        {"level": 3, "text": "The answer is 60", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q5",
+      "type": "drag_and_drop",
+      "questionText": "1, 4, 7, 10, ?",
+      "correctAnswer": "13",
+      "options": ["11", "12", "13", "14", "15", "16"],
+      "explanation": "The pattern is add 3! 1, 4, 7, 10, 13",
+      "hints": [
+        {"level": 1, "text": "The numbers go up by 3 each time"},
+        {"level": 2, "text": "10 + 3 = ?"},
+        {"level": 3, "text": "The answer is 13", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q6",
+      "type": "drag_and_drop",
+      "questionText": "27, 24, 21, 18, ?",
+      "correctAnswer": "15",
+      "options": ["12", "13", "14", "15", "16", "17"],
+      "explanation": "The pattern is subtract 3! 27, 24, 21, 18, 15",
+      "hints": [
+        {"level": 1, "text": "The numbers go down by 3 each time"},
+        {"level": 2, "text": "18 - 3 = ?"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q7",
+      "type": "drag_and_drop",
+      "questionText": "5, 10, 20, 40, ?",
+      "correctAnswer": "80",
+      "options": ["60", "70", "75", "80", "85", "90"],
+      "explanation": "The pattern is doubling! 5, 10, 20, 40, 80",
+      "hints": [
+        {"level": 1, "text": "Each number is double the last"},
+        {"level": 2, "text": "40 × 2 = ?"},
+        {"level": 3, "text": "The answer is 80", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q8",
+      "type": "drag_and_drop",
+      "questionText": "2, 6, 10, 14, ?",
+      "correctAnswer": "18",
+      "options": ["15", "16", "17", "18", "19", "20"],
+      "explanation": "The pattern is add 4! 2, 6, 10, 14, 18",
+      "hints": [
+        {"level": 1, "text": "The numbers go up by 4 each time"},
+        {"level": 2, "text": "14 + 4 = ?"},
+        {"level": 3, "text": "The answer is 18", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q9",
+      "type": "drag_and_drop",
+      "questionText": "64, 32, 16, 8, ?",
+      "correctAnswer": "4",
+      "options": ["2", "3", "4", "5", "6", "7"],
+      "explanation": "The pattern is halving! 64, 32, 16, 8, 4",
+      "hints": [
+        {"level": 1, "text": "Each number is half of the last"},
+        {"level": 2, "text": "8 ÷ 2 = ?"},
+        {"level": 3, "text": "The answer is 4", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l9q10",
+      "type": "drag_and_drop",
+      "questionText": "3, 9, 15, 21, ?",
+      "correctAnswer": "27",
+      "options": ["23", "24", "25", "26", "27", "28"],
+      "explanation": "The pattern is add 6! 3, 9, 15, 21, 27",
+      "hints": [
+        {"level": 1, "text": "The numbers go up by 6 each time"},
+        {"level": 2, "text": "21 + 6 = ?"},
+        {"level": 3, "text": "The answer is 27", "showsAnswer": true}
+      ]
+    }
+  ]
+}

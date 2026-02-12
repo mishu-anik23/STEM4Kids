@@ -1,0 +1,140 @@
+{
+  "levelId": 10,
+  "worldId": 1,
+  "title": "Island Boss Battle",
+  "description": "The ultimate Math Island challenge!",
+  "difficulty": "hard",
+  "theme": "boss",
+  "mathType": "mixed",
+  "targetGrade": [3, 4],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l10q1",
+      "type": "multiple_choice",
+      "questionText": "15 + 8 = ?",
+      "correctAnswer": "23",
+      "options": ["23", "22", "24", "7"],
+      "explanation": "15 plus 8 equals 23!",
+      "hints": [
+        {"level": 1, "text": "15 + 5 = 20, then add 3 more"},
+        {"level": 2, "text": "Think: 15 + 8 = 20 + 3"},
+        {"level": 3, "text": "The answer is 23", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q2",
+      "type": "fill_in_blank",
+      "questionText": "24 ÷ 3 = ?",
+      "correctAnswer": "8",
+      "explanation": "24 divided by 3 equals 8!",
+      "hints": [
+        {"level": 1, "text": "Think: 3 × ? = 24"},
+        {"level": 2, "text": "How many groups of 3 are in 24?"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q3",
+      "type": "word_problem",
+      "questionText": "You have 5 bags with 4 candies each. How many candies total?",
+      "correctAnswer": "20",
+      "options": ["20", "9", "15", "25"],
+      "explanation": "5 × 4 = 20 candies!",
+      "hints": [
+        {"level": 1, "text": "This is multiplication: 5 × 4"},
+        {"level": 2, "text": "5 groups of 4 is..."},
+        {"level": 3, "text": "The answer is 20", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q4",
+      "type": "multiple_choice",
+      "questionText": "7 × 6 = ?",
+      "correctAnswer": "42",
+      "options": ["42", "36", "48", "13"],
+      "explanation": "7 × 6 equals 42!",
+      "hints": [
+        {"level": 1, "text": "7 × 6 = (7 × 5) + 7"},
+        {"level": 2, "text": "35 + 7 = ?"},
+        {"level": 3, "text": "The answer is 42", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q5",
+      "type": "fill_in_blank",
+      "questionText": "32 - 15 = ?",
+      "correctAnswer": "17",
+      "explanation": "32 minus 15 equals 17!",
+      "hints": [
+        {"level": 1, "text": "32 - 10 = 22, then subtract 5 more"},
+        {"level": 2, "text": "22 - 5 = ?"},
+        {"level": 3, "text": "The answer is 17", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q6",
+      "type": "multiple_choice",
+      "questionText": "4, 8, 12, ?, 20",
+      "correctAnswer": "16",
+      "options": ["16", "14", "15", "18"],
+      "explanation": "The pattern is counting by 4s! 4, 8, 12, 16, 20",
+      "hints": [
+        {"level": 1, "text": "The numbers go up by 4 each time"},
+        {"level": 2, "text": "12 + 4 = ?"},
+        {"level": 3, "text": "The answer is 16", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q7",
+      "type": "word_problem",
+      "questionText": "You start with 30 coins, spend 12, then find 8 more. How many coins now?",
+      "correctAnswer": "26",
+      "options": ["26", "24", "28", "50"],
+      "explanation": "30 - 12 + 8 = 26 coins!",
+      "hints": [
+        {"level": 1, "text": "First subtract: 30 - 12 = 18"},
+        {"level": 2, "text": "Then add: 18 + 8 = ?"},
+        {"level": 3, "text": "The answer is 26", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q8",
+      "type": "fill_in_blank",
+      "questionText": "18 ÷ 2 = ?",
+      "correctAnswer": "9",
+      "explanation": "18 divided by 2 equals 9!",
+      "hints": [
+        {"level": 1, "text": "Half of 18 is..."},
+        {"level": 2, "text": "Think: 2 × ? = 18"},
+        {"level": 3, "text": "The answer is 9", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q9",
+      "type": "multiple_choice",
+      "questionText": "9 + 7 + 5 = ?",
+      "correctAnswer": "21",
+      "options": ["21", "20", "22", "19"],
+      "explanation": "9 + 7 + 5 equals 21!",
+      "hints": [
+        {"level": 1, "text": "Add step by step: 9 + 7 = 16"},
+        {"level": 2, "text": "Then: 16 + 5 = ?"},
+        {"level": 3, "text": "The answer is 21", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l10q10",
+      "type": "fill_in_blank",
+      "questionText": "6 × 5 = ?",
+      "correctAnswer": "30",
+      "explanation": "6 × 5 equals 30!",
+      "hints": [
+        {"level": 1, "text": "6 groups of 5 is..."},
+        {"level": 2, "text": "5 + 5 + 5 + 5 + 5 + 5 = ?"},
+        {"level": 3, "text": "The answer is 30", "showsAnswer": true}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "levelId": 8,
+  "worldId": 1,
+  "title": "Sharing Treasures",
+  "description": "Learn to divide numbers equally!",
+  "difficulty": "medium",
+  "theme": "treasure",
+  "mathType": "division",
+  "targetGrade": [3],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l8q1",
+      "type": "fill_in_blank",
+      "questionText": "10 ÷ 2 = ?",
+      "correctAnswer": "5",
+      "explanation": "10 divided by 2 equals 5!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 2 are in 10?"},
+        {"level": 2, "text": "Think: 2 × ? = 10"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q2",
+      "type": "fill_in_blank",
+      "questionText": "15 ÷ 3 = ?",
+      "correctAnswer": "5",
+      "explanation": "15 divided by 3 equals 5!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 3 are in 15?"},
+        {"level": 2, "text": "Think: 3 × ? = 15"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q3",
+      "type": "fill_in_blank",
+      "questionText": "20 ÷ 5 = ?",
+      "correctAnswer": "4",
+      "explanation": "20 divided by 5 equals 4!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 5 are in 20?"},
+        {"level": 2, "text": "Think: 5 × ? = 20"},
+        {"level": 3, "text": "The answer is 4", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q4",
+      "type": "fill_in_blank",
+      "questionText": "12 ÷ 2 = ?",
+      "correctAnswer": "6",
+      "explanation": "12 divided by 2 equals 6!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 2 are in 12?"},
+        {"level": 2, "text": "Think: 2 × ? = 12"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q5",
+      "type": "fill_in_blank",
+      "questionText": "18 ÷ 3 = ?",
+      "correctAnswer": "6",
+      "explanation": "18 divided by 3 equals 6!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 3 are in 18?"},
+        {"level": 2, "text": "Think: 3 × ? = 18"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q6",
+      "type": "fill_in_blank",
+      "questionText": "25 ÷ 5 = ?",
+      "correctAnswer": "5",
+      "explanation": "25 divided by 5 equals 5!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 5 are in 25?"},
+        {"level": 2, "text": "Think: 5 × ? = 25"},
+        {"level": 3, "text": "The answer is 5", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q7",
+      "type": "fill_in_blank",
+      "questionText": "16 ÷ 2 = ?",
+      "correctAnswer": "8",
+      "explanation": "16 divided by 2 equals 8!",
+      "hints": [
+        {"level": 1, "text": "Half of 16 is..."},
+        {"level": 2, "text": "Think: 2 × ? = 16"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q8",
+      "type": "fill_in_blank",
+      "questionText": "21 ÷ 3 = ?",
+      "correctAnswer": "7",
+      "explanation": "21 divided by 3 equals 7!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 3 are in 21?"},
+        {"level": 2, "text": "Think: 3 × ? = 21"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q9",
+      "type": "fill_in_blank",
+      "questionText": "30 ÷ 5 = ?",
+      "correctAnswer": "6",
+      "explanation": "30 divided by 5 equals 6!",
+      "hints": [
+        {"level": 1, "text": "How many groups of 5 are in 30?"},
+        {"level": 2, "text": "Think: 5 × ? = 30"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l8q10",
+      "type": "fill_in_blank",
+      "questionText": "14 ÷ 2 = ?",
+      "correctAnswer": "7",
+      "explanation": "14 divided by 2 equals 7!",
+      "hints": [
+        {"level": 1, "text": "Half of 14 is..."},
+        {"level": 2, "text": "Think: 2 × ? = 14"},
+        {"level": 3, "text": "The answer is 7", "showsAnswer": true}
+      ]
+    }
+  ]
+}

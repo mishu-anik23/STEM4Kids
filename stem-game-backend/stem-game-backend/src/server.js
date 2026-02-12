@@ -31,7 +31,7 @@ const io = new Server(server, {
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3001',
+  origin: ['http://localhost:3001', 'http://127.0.0.1:3001', 'http://localhost:8080', 'http://127.0.0.1:8080', /^https?:\/\/localhost:\d+$/, /^https?:\/\/127\.0\.0\.1:\d+$/],
   credentials: true
 }));
 app.use(compression());
@@ -116,15 +116,21 @@ const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {
+    console.log('Starting server initialization...');
+    
     // Test database connection
+    console.log('Testing database connection...');
     await testConnection();
+    console.log('✅ Database connection established successfully');
     
     // Sync database models (in development)
     if (process.env.NODE_ENV === 'development') {
+      console.log('Syncing database models...');
       await sequelize.sync({ alter: true });
       console.log('✅ Database models synchronized');
     }
 
+    console.log(`Attempting to listen on port ${PORT}...`);
     // Start server
     server.listen(PORT, () => {
       console.log(`
@@ -142,6 +148,7 @@ const startServer = async () => {
     });
   } catch (error) {
     console.error('Failed to start server:', error);
+    console.error('Error stack:', error.stack);
     process.exit(1);
   }
 };

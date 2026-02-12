@@ -88,13 +88,13 @@ const LevelProgress = sequelize.define('LevelProgress', {
   indexes: [
     {
       unique: true,
-      fields: ['userId', 'worldId', 'levelId']
+      fields: ['user_id', 'world_id', 'level_id']
     },
     {
-      fields: ['userId']
+      fields: ['user_id']
     },
     {
-      fields: ['worldId', 'levelId']
+      fields: ['world_id', 'level_id']
     }
   ]
 });

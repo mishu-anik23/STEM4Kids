@@ -1,0 +1,144 @@
+{
+  "levelId": 6,
+  "worldId": 1,
+  "title": "Seashell Groups",
+  "description": "Learn to multiply numbers!",
+  "difficulty": "medium",
+  "theme": "seashells",
+  "mathType": "multiplication",
+  "targetGrade": [2, 3],
+  "totalQuestions": 10,
+  "passingScore": 50,
+  "questions": [
+    {
+      "id": "l6q1",
+      "type": "multiple_choice",
+      "questionText": "2 × 3 = ?",
+      "correctAnswer": "6",
+      "options": ["6", "5", "8", "9"],
+      "explanation": "2 × 3 means 3 groups of 2, which equals 6!",
+      "hints": [
+        {"level": 1, "text": "2 + 2 + 2 = ?"},
+        {"level": 2, "text": "Three groups of 2 is 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q2",
+      "type": "multiple_choice",
+      "questionText": "5 × 2 = ?",
+      "correctAnswer": "10",
+      "options": ["10", "7", "12", "15"],
+      "explanation": "5 × 2 means 2 groups of 5, which equals 10!",
+      "hints": [
+        {"level": 1, "text": "5 + 5 = ?"},
+        {"level": 2, "text": "Two groups of 5 is 10"},
+        {"level": 3, "text": "The answer is 10", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q3",
+      "type": "multiple_choice",
+      "questionText": "3 × 3 = ?",
+      "correctAnswer": "9",
+      "options": ["9", "6", "12", "15"],
+      "explanation": "3 × 3 means 3 groups of 3, which equals 9!",
+      "hints": [
+        {"level": 1, "text": "3 + 3 + 3 = ?"},
+        {"level": 2, "text": "Three groups of 3 is 9"},
+        {"level": 3, "text": "The answer is 9", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q4",
+      "type": "multiple_choice",
+      "questionText": "2 × 4 = ?",
+      "correctAnswer": "8",
+      "options": ["8", "6", "10", "12"],
+      "explanation": "2 × 4 means 4 groups of 2, which equals 8!",
+      "hints": [
+        {"level": 1, "text": "2 + 2 + 2 + 2 = ?"},
+        {"level": 2, "text": "Four groups of 2 is 8"},
+        {"level": 3, "text": "The answer is 8", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q5",
+      "type": "multiple_choice",
+      "questionText": "5 × 3 = ?",
+      "correctAnswer": "15",
+      "options": ["15", "10", "18", "20"],
+      "explanation": "5 × 3 means 3 groups of 5, which equals 15!",
+      "hints": [
+        {"level": 1, "text": "5 + 5 + 5 = ?"},
+        {"level": 2, "text": "Three groups of 5 is 15"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q6",
+      "type": "multiple_choice",
+      "questionText": "3 × 4 = ?",
+      "correctAnswer": "12",
+      "options": ["12", "9", "15", "16"],
+      "explanation": "3 × 4 means 4 groups of 3, which equals 12!",
+      "hints": [
+        {"level": 1, "text": "3 + 3 + 3 + 3 = ?"},
+        {"level": 2, "text": "Four groups of 3 is 12"},
+        {"level": 3, "text": "The answer is 12", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q7",
+      "type": "multiple_choice",
+      "questionText": "2 × 5 = ?",
+      "correctAnswer": "10",
+      "options": ["10", "7", "12", "15"],
+      "explanation": "2 × 5 means 5 groups of 2, which equals 10!",
+      "hints": [
+        {"level": 1, "text": "2 + 2 + 2 + 2 + 2 = ?"},
+        {"level": 2, "text": "Five groups of 2 is 10"},
+        {"level": 3, "text": "The answer is 10", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q8",
+      "type": "multiple_choice",
+      "questionText": "3 × 5 = ?",
+      "correctAnswer": "15",
+      "options": ["15", "12", "18", "20"],
+      "explanation": "3 × 5 means 5 groups of 3, which equals 15!",
+      "hints": [
+        {"level": 1, "text": "3 + 3 + 3 + 3 + 3 = ?"},
+        {"level": 2, "text": "Five groups of 3 is 15"},
+        {"level": 3, "text": "The answer is 15", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q9",
+      "type": "multiple_choice",
+      "questionText": "5 × 4 = ?",
+      "correctAnswer": "20",
+      "options": ["20", "15", "25", "30"],
+      "explanation": "5 × 4 means 4 groups of 5, which equals 20!",
+      "hints": [
+        {"level": 1, "text": "5 + 5 + 5 + 5 = ?"},
+        {"level": 2, "text": "Four groups of 5 is 20"},
+        {"level": 3, "text": "The answer is 20", "showsAnswer": true}
+      ]
+    },
+    {
+      "id": "l6q10",
+      "type": "multiple_choice",
+      "questionText": "3 × 2 = ?",
+      "correctAnswer": "6",
+      "options": ["6", "5", "8", "9"],
+      "explanation": "3 × 2 means 2 groups of 3, which equals 6!",
+      "hints": [
+        {"level": 1, "text": "3 + 3 = ?"},
+        {"level": 2, "text": "Two groups of 3 is 6"},
+        {"level": 3, "text": "The answer is 6", "showsAnswer": true}
+      ]
+    }
+  ]
+}
