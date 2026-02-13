@@ -12,7 +12,7 @@ class LoadProgressEvent extends ProgressEvent {}
 
 class SubmitLevelCompletionEvent extends ProgressEvent {
   final int worldId;
-  final int levelId;
+  final String levelId;
   final int score;
   final int timeSpentSeconds;
   final int hintsUsed;
