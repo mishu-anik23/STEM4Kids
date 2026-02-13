@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'topic.dart';
 
 class Island extends Equatable {
   final String id;
@@ -13,6 +14,7 @@ class Island extends Equatable {
   final bool isActive;
   final bool isUnlocked;
   final IslandProgress? userProgress;
+  final List<Topic>? topics;
 
   const Island({
     required this.id,
@@ -27,23 +29,29 @@ class Island extends Equatable {
     this.isActive = true,
     this.isUnlocked = true,
     this.userProgress,
+    this.topics,
   });
 
   factory Island.fromJson(Map<String, dynamic> json) {
     return Island(
-      id: json['id'] as String,
-      code: json['code'] as String,
-      worldId: json['worldId'] as int,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      topicCategory: json['topicCategory'] as String,
-      orderIndex: json['orderIndex'] as int,
+      id: json['id'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      worldId: json['worldId'] as int? ?? 0,
+      name: json['name'] as String? ?? 'Unknown Island',
+      description: json['description'] as String? ?? '',
+      topicCategory: json['topicCategory'] as String? ?? '',
+      orderIndex: json['orderIndex'] as int? ?? 0,
       iconUrl: json['iconUrl'] as String?,
       unlockRequirements: json['unlockRequirements'] as Map<String, dynamic>?,
       isActive: json['isActive'] as bool? ?? true,
       isUnlocked: json['isUnlocked'] as bool? ?? true,
       userProgress: json['userProgress'] != null
           ? IslandProgress.fromJson(json['userProgress'] as Map<String, dynamic>)
+          : null,
+      topics: json['topics'] != null
+          ? (json['topics'] as List<dynamic>)
+              .map((topic) => Topic.fromJson(topic as Map<String, dynamic>))
+              .toList()
           : null,
     );
   }
@@ -62,6 +70,7 @@ class Island extends Equatable {
       'isActive': isActive,
       'isUnlocked': isUnlocked,
       if (userProgress != null) 'userProgress': userProgress!.toJson(),
+      if (topics != null) 'topics': topics!.map((topic) => topic.toJson()).toList(),
     };
   }
 
@@ -79,6 +88,7 @@ class Island extends Equatable {
         isActive,
         isUnlocked,
         userProgress,
+        topics,
       ];
 }
 
@@ -131,16 +141,16 @@ class IslandProgress extends Equatable {
 
   factory IslandProgress.fromJson(Map<String, dynamic> json) {
     return IslandProgress(
-      id: json['id'] as String,
-      userId: json['userId'] as String,
-      islandId: json['islandId'] as String,
+      id: json['id'] as String? ?? '',
+      userId: json['userId'] as String? ?? '',
+      islandId: json['islandId'] as String? ?? '',
       topicId: json['topicId'] as String?,
-      totalXp: json['totalXp'] as int,
-      levelsCompleted: json['levelsCompleted'] as int,
-      totalLevels: json['totalLevels'] as int,
-      averageStars: (json['averageStars'] as num).toDouble(),
-      masteryColor: json['masteryColor'] as String,
-      topicBadgeEarned: json['topicBadgeEarned'] as bool,
+      totalXp: json['totalXp'] as int? ?? 0,
+      levelsCompleted: json['levelsCompleted'] as int? ?? 0,
+      totalLevels: json['totalLevels'] as int? ?? 0,
+      averageStars: (json['averageStars'] as num?)?.toDouble() ?? 0.0,
+      masteryColor: json['masteryColor'] as String? ?? 'grey',
+      topicBadgeEarned: json['topicBadgeEarned'] as bool? ?? false,
       badgeEarnedAt: json['badgeEarnedAt'] != null
           ? DateTime.parse(json['badgeEarnedAt'] as String)
           : null,

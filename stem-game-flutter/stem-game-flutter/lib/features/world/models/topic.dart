@@ -30,19 +30,19 @@ class Topic extends Equatable {
 
   factory Topic.fromJson(Map<String, dynamic> json) {
     return Topic(
-      id: json['id'] as String,
-      islandId: json['islandId'] as String,
-      code: json['code'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
+      id: json['id'] as String? ?? '',
+      islandId: json['islandId'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      name: json['name'] as String? ?? 'Unknown Topic',
+      description: json['description'] as String? ?? '',
       learningObjectives: (json['learningObjectives'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      orderIndex: json['orderIndex'] as int,
+      orderIndex: json['orderIndex'] as int? ?? 0,
       iconUrl: json['iconUrl'] as String?,
-      difficultyLevel: json['difficultyLevel'] as String,
-      levelCount: json['levelCount'] as int,
+      difficultyLevel: json['difficultyLevel'] as String? ?? 'beginner',
+      levelCount: json['levelCount'] as int? ?? 0,
       userProgress: json['userProgress'] != null
           ? IslandProgress.fromJson(json['userProgress'] as Map<String, dynamic>)
           : null,
