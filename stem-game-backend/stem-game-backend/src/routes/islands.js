@@ -17,25 +17,4 @@ router.get('/:worldId', islandController.getWorldIslands);
  */
 router.get('/:islandId/topics', islandController.getIslandTopics);
 
-/**
- * @route   GET /api/topics/:topicId/levels
- * @desc    Get all levels for a topic
- * @access  Public (but enhanced with user data if authenticated)
- */
-router.get('/topics/:topicId/levels', islandController.getTopicLevels);
-
-/**
- * @route   GET /api/levels/:levelId
- * @desc    Get detailed level information for playing
- * @access  Public (but enhanced with user data if authenticated)
- */
-router.get('/levels/:levelId', islandController.getLevelDetails);
-
-/**
- * @route   GET /api/progress/islands/:userId
- * @desc    Get user's progress across all islands
- * @access  Private (requires authentication)
- */
-router.get('/progress/islands/:userId', auth, islandController.getUserIslandProgress);
-
 module.exports = router;

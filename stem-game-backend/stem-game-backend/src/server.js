@@ -16,6 +16,8 @@ const authRoutes = require('./routes/authRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const islandRoutes = require('./routes/islands');
+const topicRoutes = require('./routes/topics');
+const levelRoutes = require('./routes/levels');
 
 // Initialize Express app
 const app = express();
@@ -68,6 +70,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/islands', islandRoutes);
+app.use('/api/topics', topicRoutes);
+app.use('/api/levels', levelRoutes);
 
 // Socket.io for real-time leaderboard updates
 io.on('connection', (socket) => {
