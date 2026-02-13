@@ -108,7 +108,7 @@ class LevelCompleted extends GameState {
   final int hintsUsed;
   final bool isNewBest;
   final int worldId;
-  final int levelId;
+  final String levelId;
 
   LevelCompleted({
     required this.finalScore,
