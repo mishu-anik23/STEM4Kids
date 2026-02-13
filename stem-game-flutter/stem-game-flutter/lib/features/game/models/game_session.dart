@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class GameSession extends Equatable {
   final int worldId;
-  final int levelId;
+  final String levelId;
   final DateTime startTime;
   final int currentQuestionIndex;
   final int score;
@@ -36,7 +36,7 @@ class GameSession extends Equatable {
 
   GameSession copyWith({
     int? worldId,
-    int? levelId,
+    String? levelId,
     DateTime? startTime,
     int? currentQuestionIndex,
     int? score,
