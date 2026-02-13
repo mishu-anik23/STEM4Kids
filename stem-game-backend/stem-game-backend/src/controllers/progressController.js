@@ -1,4 +1,4 @@
-const { User, LevelProgress, Achievement, UserAchievement } = require('../models');
+const { User, LevelProgress, Achievement, UserAchievement, Island, Topic, UserIslandProgress } = require('../models');
 const { leaderboardHelpers } = require('../config/redis');
 const { sequelize } = require('../config/database');
 
@@ -102,6 +102,9 @@ exports.submitLevelCompletion = async (req, res) => {
         currentLevel: Math.min(levelId + 1, 20)
       }, { transaction });
     }
+
+    // Update island progress and check world completion
+    await updateIslandProgressAndWorldCompletion(userId, progress, transaction);
 
     await transaction.commit();
 
@@ -290,4 +293,211 @@ async function checkAndUnlockAchievements(userId) {
   }
 }
 
-module.exports = { ...exports, checkAndUnlockAchievements };
+/**
+ * Update island progress and check world completion
+ * Called after level completion to update UserIslandProgress and check if user should advance worlds
+ */
+async function updateIslandProgressAndWorldCompletion(userId, levelProgress, transaction) {
+  try {
+    // Skip if level doesn't have topic/island association
+    if (!levelProgress.topicId || !levelProgress.islandId) {
+      return;
+    }
+
+    const topicId = levelProgress.topicId;
+    const islandId = levelProgress.islandId;
+
+    // Get the topic to know total level count
+    const topic = await Topic.findByPk(topicId, {
+      include: [{ model: Island, as: 'island' }],
+      transaction
+    });
+
+    if (!topic) return;
+
+    const worldId = topic.island.worldId;
+
+    // Get all completed levels for this topic
+    const topicLevels = await LevelProgress.findAll({
+      where: {
+        userId,
+        topicId,
+        completed: true
+      },
+      transaction
+    });
+
+    // Calculate topic progress stats
+    const levelsCompleted = topicLevels.length;
+    const totalLevels = topic.levelCount;
+    const totalStars = topicLevels.reduce((sum, lp) => sum + lp.stars, 0);
+    const averageStars = levelsCompleted > 0 ? totalStars / levelsCompleted : 0;
+    const totalXp = topicLevels.reduce((sum, lp) => sum + lp.xpEarned, 0);
+
+    // Determine mastery color based on completion and stars
+    let masteryColor = 'red'; // Started
+    if (levelsCompleted >= totalLevels) {
+      masteryColor = averageStars >= 2.5 ? 'green' : 'yellow'; // Mastered vs Practicing
+    } else if (levelsCompleted >= totalLevels * 0.5) {
+      masteryColor = 'yellow'; // Practicing
+    }
+
+    const topicBadgeEarned = levelsCompleted >= totalLevels && averageStars >= 2.5;
+
+    // Update or create UserIslandProgress for this topic
+    const [topicProgress] = await UserIslandProgress.findOrCreate({
+      where: {
+        userId,
+        islandId,
+        topicId
+      },
+      defaults: {
+        totalXp,
+        levelsCompleted,
+        totalLevels,
+        averageStars,
+        masteryColor,
+        topicBadgeEarned,
+        badgeEarnedAt: topicBadgeEarned ? new Date() : null
+      },
+      transaction
+    });
+
+    // Update if already exists
+    if (!topicProgress._options.isNewRecord) {
+      await topicProgress.update({
+        totalXp,
+        levelsCompleted,
+        totalLevels,
+        averageStars,
+        masteryColor,
+        topicBadgeEarned,
+        badgeEarnedAt: topicBadgeEarned && !topicProgress.badgeEarnedAt ? new Date() : topicProgress.badgeEarnedAt
+      }, { transaction });
+    }
+
+    // Now check island-level completion
+    // Get all topics for this island
+    const allTopics = await Topic.findAll({
+      where: { islandId },
+      transaction
+    });
+
+    // Get all topic progress for this island
+    const allTopicProgress = await UserIslandProgress.findAll({
+      where: {
+        userId,
+        islandId,
+        topicId: allTopics.map(t => t.id)
+      },
+      transaction
+    });
+
+    // Calculate island-level stats
+    const islandTotalLevels = allTopics.reduce((sum, t) => sum + t.levelCount, 0);
+    const islandLevelsCompleted = allTopicProgress.reduce((sum, p) => sum + p.levelsCompleted, 0);
+    const islandTotalXp = allTopicProgress.reduce((sum, p) => sum + p.totalXp, 0);
+    const islandAverageStars = allTopicProgress.length > 0
+      ? allTopicProgress.reduce((sum, p) => sum + (p.averageStars * p.levelsCompleted), 0) / islandLevelsCompleted
+      : 0;
+
+    // Check if island is complete (all topics have all levels completed)
+    const islandComplete = allTopics.length > 0 && allTopicProgress.length === allTopics.length &&
+      allTopicProgress.every(p => p.levelsCompleted >= p.totalLevels);
+
+    // Update or create island-level progress (no topicId)
+    const [islandProgress] = await UserIslandProgress.findOrCreate({
+      where: {
+        userId,
+        islandId,
+        topicId: null
+      },
+      defaults: {
+        totalXp: islandTotalXp,
+        levelsCompleted: islandLevelsCompleted,
+        totalLevels: islandTotalLevels,
+        averageStars: islandAverageStars,
+        masteryColor: islandComplete ? (islandAverageStars >= 2.5 ? 'green' : 'yellow') : 'red',
+        topicBadgeEarned: islandComplete && islandAverageStars >= 2.5,
+        badgeEarnedAt: islandComplete && islandAverageStars >= 2.5 ? new Date() : null
+      },
+      transaction
+    });
+
+    if (!islandProgress._options.isNewRecord) {
+      await islandProgress.update({
+        totalXp: islandTotalXp,
+        levelsCompleted: islandLevelsCompleted,
+        totalLevels: islandTotalLevels,
+        averageStars: islandAverageStars,
+        masteryColor: islandComplete ? (islandAverageStars >= 2.5 ? 'green' : 'yellow') : 'red',
+        topicBadgeEarned: islandComplete && islandAverageStars >= 2.5,
+        badgeEarnedAt: islandComplete && islandAverageStars >= 2.5 && !islandProgress.badgeEarnedAt ? new Date() : islandProgress.badgeEarnedAt
+      }, { transaction });
+    }
+
+    // Check world completion - if all islands in the world are completed
+    if (islandComplete) {
+      await checkAndUpdateWorldProgression(userId, worldId, transaction);
+    }
+
+  } catch (error) {
+    console.error('Error updating island progress:', error);
+    // Don't throw - this is a secondary operation
+  }
+}
+
+/**
+ * Check if all islands in a world are completed and update user.currentWorld
+ */
+async function checkAndUpdateWorldProgression(userId, completedWorldId, transaction) {
+  try {
+    // Get all islands for this world
+    const worldIslands = await Island.findAll({
+      where: {
+        worldId: completedWorldId,
+        isActive: true
+      },
+      transaction
+    });
+
+    // Each world should have 4 islands
+    if (worldIslands.length !== 4) {
+      console.warn(`World ${completedWorldId} doesn't have exactly 4 islands`);
+      return;
+    }
+
+    // Get island-level progress for all islands in this world
+    const islandProgress = await UserIslandProgress.findAll({
+      where: {
+        userId,
+        islandId: worldIslands.map(i => i.id),
+        topicId: null // Island-level progress only
+      },
+      transaction
+    });
+
+    // Check if all 4 islands are completed
+    const allIslandsCompleted = islandProgress.length === 4 &&
+      islandProgress.every(p => p.levelsCompleted >= p.totalLevels);
+
+    if (allIslandsCompleted) {
+      // Update user's currentWorld to the next world
+      const user = await User.findByPk(userId, { transaction });
+      const nextWorld = completedWorldId + 1;
+
+      if (user.currentWorld < nextWorld && nextWorld <= 4) {
+        await user.update({
+          currentWorld: nextWorld
+        }, { transaction });
+
+        console.log(`✨ User ${userId} unlocked World ${nextWorld}! All islands in World ${completedWorldId} completed.`);
+      }
+    }
+  } catch (error) {
+    console.error('Error checking world progression:', error);
+    // Don't throw - this is a secondary operation
+  }
+}
+
+module.exports = { ...exports, checkAndUnlockAchievements, updateIslandProgressAndWorldCompletion };
