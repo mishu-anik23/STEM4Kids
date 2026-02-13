@@ -13,7 +13,7 @@ import '../widgets/question_widgets/drag_drop_widget.dart';
 
 class GameScreen extends StatefulWidget {
   final int worldId;
-  final int levelId;
+  final String levelId;
 
   const GameScreen({
     super.key,

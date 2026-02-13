@@ -7,8 +7,9 @@ import '../../world/models/level.dart';
 
 class LevelListScreen extends StatefulWidget {
   final String topicId;
+  final int worldId;
 
-  const LevelListScreen({super.key, required this.topicId});
+  const LevelListScreen({super.key, required this.topicId, required this.worldId});
 
   @override
   State<LevelListScreen> createState() => _LevelListScreenState();
@@ -293,8 +294,7 @@ class _LevelListScreenState extends State<LevelListScreen> {
   }
 
   void _playLevel(BuildContext context, Level level) {
-    // Navigate to level gameplay screen
-    // TODO: Implement level gameplay screen
-    context.push('/level/${level.id}/play');
+    // Navigate to level gameplay screen using existing GameScreen route
+    context.push('/game/${widget.worldId}/${level.id}');
   }
 }

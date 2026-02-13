@@ -7,7 +7,7 @@ abstract class GameEvent extends Equatable {
 
 class LoadLevelEvent extends GameEvent {
   final int worldId;
-  final int levelId;
+  final String levelId;
 
   LoadLevelEvent(this.worldId, this.levelId);
 

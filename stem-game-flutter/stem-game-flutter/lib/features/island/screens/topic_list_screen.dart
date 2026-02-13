@@ -81,6 +81,7 @@ class _TopicListScreenState extends State<TopicListScreen> {
 
           final data = snapshot.data!;
           final island = data['island'] as Map<String, dynamic>;
+          final worldId = island['worldId'] as int;
           final topics = (data['topics'] as List)
               .map((t) => Topic.fromJson(t as Map<String, dynamic>))
               .toList();
@@ -144,7 +145,7 @@ class _TopicListScreenState extends State<TopicListScreen> {
                         itemCount: topics.length,
                         itemBuilder: (context, index) {
                           final topic = topics[index];
-                          return _buildTopicCard(context, topic, index + 1);
+                          return _buildTopicCard(context, topic, index + 1, worldId);
                         },
                       ),
               ),
@@ -155,7 +156,7 @@ class _TopicListScreenState extends State<TopicListScreen> {
     );
   }
 
-  Widget _buildTopicCard(BuildContext context, Topic topic, int number) {
+  Widget _buildTopicCard(BuildContext context, Topic topic, int number, int worldId) {
     final isUnlocked = topic.isUnlocked ?? true;
 
     return Card(
@@ -165,7 +166,7 @@ class _TopicListScreenState extends State<TopicListScreen> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: InkWell(
-        onTap: isUnlocked ? () => _openTopic(context, topic) : null,
+        onTap: isUnlocked ? () => _openTopic(context, topic, worldId) : null,
         borderRadius: BorderRadius.circular(16),
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -273,9 +274,9 @@ class _TopicListScreenState extends State<TopicListScreen> {
     );
   }
 
-  void _openTopic(BuildContext context, Topic topic) {
-    // Navigate to level list screen
-    context.push('/levels/${topic.id}');
+  void _openTopic(BuildContext context, Topic topic, int worldId) {
+    // Navigate to level list screen with worldId as query parameter
+    context.push('/levels/${topic.id}?worldId=$worldId');
   }
 
   Color _getCategoryColor(String? category) {

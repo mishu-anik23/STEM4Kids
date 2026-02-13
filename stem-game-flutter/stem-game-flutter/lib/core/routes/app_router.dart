@@ -43,14 +43,15 @@ class AppRouter {
         path: '/levels/:topicId',
         builder: (context, state) {
           final topicId = state.pathParameters['topicId']!;
-          return LevelListScreen(topicId: topicId);
+          final worldId = int.parse(state.uri.queryParameters['worldId'] ?? '1');
+          return LevelListScreen(topicId: topicId, worldId: worldId);
         },
       ),
       GoRoute(
         path: '/game/:worldId/:levelId',
         builder: (context, state) {
           final worldId = int.parse(state.pathParameters['worldId']!);
-          final levelId = int.parse(state.pathParameters['levelId']!);
+          final levelId = state.pathParameters['levelId']!;
           return GameScreen(worldId: worldId, levelId: levelId);
         },
       ),
