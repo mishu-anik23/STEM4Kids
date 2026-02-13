@@ -9,6 +9,7 @@
     "migrate": "node database/migrate.js",
     "seed": "node database/seed.js",
     "seed:physics": "node scripts/seedPhysicsIsland.js",
+    "verify:physics": "node scripts/verifyPhysicsData.js",
     "test": "jest --coverage"
   },
   "keywords": [

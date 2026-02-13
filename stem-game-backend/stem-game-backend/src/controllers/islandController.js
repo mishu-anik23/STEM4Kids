@@ -1,4 +1,4 @@
-const { Island, Topic, UserIslandProgress, LevelProgress } = require('../models');
+const { Island, Topic, Level, UserIslandProgress, LevelProgress, User } = require('../models');
 
 /**
  * Get all islands for a specific world
@@ -91,6 +91,9 @@ exports.getIslandTopics = async (req, res) => {
     const { islandId } = req.params;
     const userId = req.userId; // From auth middleware
 
+    // Get user to check their type
+    const user = userId ? await User.findByPk(userId) : null;
+
     // Get island with topics
     const island = await Island.findByPk(islandId, {
       include: [
@@ -124,11 +127,39 @@ exports.getIslandTopics = async (req, res) => {
       progressMap[progress.topicId] = progress;
     });
 
-    // Add progress to each topic
-    const topicsWithProgress = island.topics.map(topic => ({
-      ...topic.toJSON(),
-      userProgress: progressMap[topic.id] || null
-    }));
+    // Check if user has unrestricted access (teacher/parent)
+    const hasUnrestrictedAccess = user && user.hasUnrestrictedAccess();
+
+    // Add progress and unlock status to each topic
+    const topicsWithProgress = island.topics.map((topic, index) => {
+      const progress = progressMap[topic.id];
+
+      // Determine if topic is unlocked
+      let isUnlocked = false;
+
+      if (hasUnrestrictedAccess) {
+        // Teachers and parents have access to all topics
+        isUnlocked = true;
+      } else if (index === 0) {
+        // First topic is always unlocked for students
+        isUnlocked = true;
+      } else {
+        // Check if previous topic is completed
+        const previousTopic = island.topics[index - 1];
+        const previousProgress = progressMap[previousTopic.id];
+
+        // Topic is unlocked if previous topic has all levels completed
+        if (previousProgress && previousProgress.levelsCompleted >= previousTopic.levelCount) {
+          isUnlocked = true;
+        }
+      }
+
+      return {
+        ...topic.toJSON(),
+        isUnlocked,
+        userProgress: progress || null
+      };
+    });
 
     res.json({
       success: true,
@@ -154,7 +185,7 @@ exports.getIslandTopics = async (req, res) => {
 };
 
 /**
- * Get all level IDs for a specific topic
+ * Get all levels for a specific topic with progress
  * GET /api/topics/:topicId/levels
  */
 exports.getTopicLevels = async (req, res) => {
@@ -162,13 +193,26 @@ exports.getTopicLevels = async (req, res) => {
     const { topicId } = req.params;
     const userId = req.userId;
 
-    // Get topic
+    // Get user to check their type
+    const user = userId ? await User.findByPk(userId) : null;
+
+    // Get topic with island
     const topic = await Topic.findByPk(topicId, {
       include: [
         {
           model: Island,
           as: 'island',
-          attributes: ['id', 'worldId', 'name']
+          attributes: ['id', 'worldId', 'name', 'code']
+        },
+        {
+          model: Level,
+          as: 'levels',
+          order: [['levelNumber', 'ASC']],
+          attributes: [
+            'id', 'levelNumber', 'code', 'name', 'description',
+            'challengeType', 'difficultyLevel', 'estimatedDurationMinutes',
+            'maxStars', 'xpReward', 'coinsReward'
+          ]
         }
       ]
     });
@@ -180,29 +224,92 @@ exports.getTopicLevels = async (req, res) => {
       });
     }
 
-    // Get level progress for this topic
-    const levelProgress = userId ? await LevelProgress.findAll({
-      where: {
-        userId,
-        topicId
-      },
-      order: [['levelId', 'ASC']]
-    }) : [];
+    // Check if topic is unlocked for this user
+    const hasUnrestrictedAccess = user && user.hasUnrestrictedAccess();
 
-    // Generate level list (assuming 8 levels per topic by default)
-    const levels = [];
-    for (let i = 1; i <= topic.levelCount; i++) {
-      const progress = levelProgress.find(lp => lp.levelId === i);
-      levels.push({
-        levelId: i,
-        worldId: topic.island.worldId,
-        topicId: topic.id,
-        completed: progress?.completed || false,
-        stars: progress?.stars || 0,
-        score: progress?.score || 0,
-        attempts: progress?.attempts || 0
+    if (!hasUnrestrictedAccess && userId) {
+      // For students, check if topic is unlocked
+      const allTopics = await Topic.findAll({
+        where: { islandId: topic.island.id },
+        order: [['orderIndex', 'ASC']]
+      });
+
+      const topicIndex = allTopics.findIndex(t => t.id === topic.id);
+
+      if (topicIndex > 0) {
+        // Check if previous topic is completed
+        const previousTopic = allTopics[topicIndex - 1];
+        const previousProgress = await UserIslandProgress.findOne({
+          where: {
+            userId,
+            topicId: previousTopic.id
+          }
+        });
+
+        if (!previousProgress || previousProgress.levelsCompleted < previousTopic.levelCount) {
+          return res.status(403).json({
+            success: false,
+            message: 'Previous topic must be completed first',
+            requiredTopic: {
+              id: previousTopic.id,
+              name: previousTopic.name
+            }
+          });
+        }
+      }
+    }
+
+    // Get level progress for this user
+    const levelProgressMap = {};
+    if (userId) {
+      const levelProgress = await LevelProgress.findAll({
+        where: {
+          userId,
+          topicId
+        }
+      });
+
+      levelProgress.forEach(progress => {
+        levelProgressMap[progress.levelId] = progress;
       });
     }
+
+    // Map levels with progress and unlock status
+    const levelsWithProgress = topic.levels.map((level, index) => {
+      const progress = levelProgressMap[level.levelNumber];
+
+      // Determine if level is unlocked
+      let isUnlocked = false;
+
+      if (hasUnrestrictedAccess) {
+        // Teachers and parents have access to all levels
+        isUnlocked = true;
+      } else if (index === 0) {
+        // First level is always unlocked
+        isUnlocked = true;
+      } else {
+        // Check if previous level is completed
+        const previousLevel = topic.levels[index - 1];
+        const previousProgress = levelProgressMap[previousLevel.levelNumber];
+
+        if (previousProgress && previousProgress.completed) {
+          isUnlocked = true;
+        }
+      }
+
+      return {
+        ...level.toJSON(),
+        isUnlocked,
+        userProgress: progress ? {
+          completed: progress.completed,
+          stars: progress.stars,
+          score: progress.score,
+          attempts: progress.attempts,
+          timeSpentSeconds: progress.timeSpentSeconds,
+          completedAt: progress.completedAt
+        } : null
+      };
+    });
 
     res.json({
       success: true,
@@ -212,9 +319,10 @@ exports.getTopicLevels = async (req, res) => {
           code: topic.code,
           name: topic.name,
           description: topic.description,
+          learningObjectives: topic.learningObjectives,
           island: topic.island
         },
-        levels
+        levels: levelsWithProgress
       }
     });
   } catch (error) {
@@ -222,6 +330,126 @@ exports.getTopicLevels = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to fetch levels',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get detailed level information for playing
+ * GET /api/levels/:levelId
+ */
+exports.getLevelDetails = async (req, res) => {
+  try {
+    const { levelId } = req.params;
+    const userId = req.userId;
+
+    // Get user to check their type
+    const user = userId ? await User.findByPk(userId) : null;
+
+    // Get level with topic and island
+    const level = await Level.findByPk(levelId, {
+      include: [
+        {
+          model: Topic,
+          as: 'topic',
+          include: [
+            {
+              model: Island,
+              as: 'island',
+              attributes: ['id', 'worldId', 'name', 'code']
+            }
+          ]
+        }
+      ]
+    });
+
+    if (!level) {
+      return res.status(404).json({
+        success: false,
+        message: 'Level not found'
+      });
+    }
+
+    // Check if level is unlocked for this user
+    const hasUnrestrictedAccess = user && user.hasUnrestrictedAccess();
+
+    if (!hasUnrestrictedAccess && userId) {
+      // For students, check if level is unlocked
+      if (level.levelNumber > 1) {
+        // Get previous level
+        const previousLevel = await Level.findOne({
+          where: {
+            topicId: level.topicId,
+            levelNumber: level.levelNumber - 1
+          }
+        });
+
+        if (previousLevel) {
+          // Check if previous level is completed
+          const previousProgress = await LevelProgress.findOne({
+            where: {
+              userId,
+              topicId: level.topicId,
+              levelId: previousLevel.levelNumber
+            }
+          });
+
+          if (!previousProgress || !previousProgress.completed) {
+            return res.status(403).json({
+              success: false,
+              message: 'Previous level must be completed first',
+              requiredLevel: {
+                id: previousLevel.id,
+                name: previousLevel.name,
+                levelNumber: previousLevel.levelNumber
+              }
+            });
+          }
+        }
+      }
+    }
+
+    // Get user's progress for this level
+    let userProgress = null;
+    if (userId) {
+      userProgress = await LevelProgress.findOne({
+        where: {
+          userId,
+          topicId: level.topicId,
+          levelId: level.levelNumber
+        }
+      });
+    }
+
+    res.json({
+      success: true,
+      data: {
+        level: {
+          ...level.toJSON(),
+          topic: {
+            id: level.topic.id,
+            code: level.topic.code,
+            name: level.topic.name
+          },
+          island: level.topic.island
+        },
+        userProgress: userProgress ? {
+          completed: userProgress.completed,
+          stars: userProgress.stars,
+          score: userProgress.score,
+          attempts: userProgress.attempts,
+          timeSpentSeconds: userProgress.timeSpentSeconds,
+          completedAt: userProgress.completedAt,
+          hintsUsed: userProgress.hintsUsed
+        } : null
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching level details:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch level details',
       error: error.message
     });
   }
