@@ -234,14 +234,8 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        final nextLevelId = widget.levelCompleted.levelId + 1;
-                        if (nextLevelId <= 20) {
-                          context.go(
-                            '/game/${widget.levelCompleted.worldId}/$nextLevelId',
-                          );
-                        } else {
-                          context.go('/world-map');
-                        }
+                        // Navigate back to level list to select next level
+                        Navigator.of(context).popUntil((route) => route.isFirst || route.settings.name?.contains('levels') == true);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -251,11 +245,9 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Text(
-                        widget.levelCompleted.levelId < 20
-                            ? 'Next Level'
-                            : 'World Map',
-                        style: const TextStyle(
+                      child: const Text(
+                        'Continue',
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
