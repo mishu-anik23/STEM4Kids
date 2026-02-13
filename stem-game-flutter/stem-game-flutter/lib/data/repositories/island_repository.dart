@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import '../../core/constants/api_constants.dart';
 import '../../features/world/models/island.dart';
 import '../../features/world/models/topic.dart';
+import '../../features/world/models/level.dart';
 
 class IslandRepository {
   final String baseUrl = ApiConstants.baseUrl;
@@ -77,6 +78,38 @@ class IslandRepository {
     }
   }
 
+  /// Get island details with all topics
+  /// Returns a map containing island info and topics list
+  Future<Map<String, dynamic>> getIslandWithTopics(String islandId, {String? token}) async {
+    try {
+      final headers = <String, String>{
+        'Content-Type': 'application/json',
+      };
+
+      if (token != null) {
+        headers['Authorization'] = 'Bearer $token';
+      }
+
+      final response = await http.get(
+        Uri.parse('$baseUrl/islands/$islandId/topics'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success'] == true) {
+          return data['data'] as Map<String, dynamic>;
+        } else {
+          throw Exception(data['message'] ?? 'Failed to fetch island topics');
+        }
+      } else {
+        throw Exception('Failed to fetch island topics: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching island topics: $e');
+    }
+  }
+
   /// Get all level IDs for a specific topic
   /// Returns a list of level information with completion status
   Future<List<int>> getTopicLevelIds(String topicId, {String? token}) async {
@@ -104,6 +137,42 @@ class IslandRepository {
         } else {
           throw Exception(data['message'] ?? 'Failed to fetch levels');
         }
+      } else {
+        throw Exception('Failed to fetch levels: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching levels: $e');
+    }
+  }
+
+  /// Get all levels for a specific topic
+  /// Returns a map containing topic info and levels list with unlock status
+  Future<Map<String, dynamic>> getTopicLevels(String topicId, {String? token}) async {
+    try {
+      final headers = <String, String>{
+        'Content-Type': 'application/json',
+      };
+
+      if (token != null) {
+        headers['Authorization'] = 'Bearer $token';
+      }
+
+      final response = await http.get(
+        Uri.parse('$baseUrl/topics/$topicId/levels'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success'] == true) {
+          return data['data'] as Map<String, dynamic>;
+        } else {
+          throw Exception(data['message'] ?? 'Failed to fetch levels');
+        }
+      } else if (response.statusCode == 403) {
+        // Topic is locked
+        final data = json.decode(response.body);
+        throw Exception(data['message'] ?? 'This topic is locked');
       } else {
         throw Exception('Failed to fetch levels: ${response.statusCode}');
       }

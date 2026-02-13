@@ -292,65 +292,7 @@ class _WorldScreenState extends State<WorldScreen> {
   }
 
   void _openIsland(BuildContext context, Island island) {
-    // TODO: Navigate to IslandScreen to show topics
-    // For now, show a dialog with topics
-    final topics = island.topics ?? [];
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(island.name),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(island.description),
-              const SizedBox(height: 16),
-              Text(
-                'Topics (${topics.length}):',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              if (topics.isEmpty)
-                const Text('No topics available yet.')
-              else
-                ...topics.map((topic) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.book, size: 16),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              topic.name,
-                              style: const TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            if (topic.description.isNotEmpty)
-                              Text(
-                                topic.description,
-                                style: const TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
+    // Navigate to topic list screen for this island
+    context.push('/topics/${island.id}');
   }
 }

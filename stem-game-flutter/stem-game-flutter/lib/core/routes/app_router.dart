@@ -3,6 +3,8 @@ import '../../features/auth/screens/login_screen.dart';
 import '../../features/auth/screens/register_screen.dart';
 import '../../features/world_map/screens/world_map_screen.dart';
 import '../../features/world/screens/world_screen.dart';
+import '../../features/island/screens/topic_list_screen.dart';
+import '../../features/level/screens/level_list_screen.dart';
 import '../../features/game/screens/game_screen.dart';
 import '../../features/game/screens/level_complete_screen.dart';
 import '../../features/game/bloc/game_state.dart';
@@ -28,6 +30,20 @@ class AppRouter {
         builder: (context, state) {
           final worldId = int.parse(state.pathParameters['id']!);
           return WorldScreen(worldId: worldId);
+        },
+      ),
+      GoRoute(
+        path: '/topics/:islandId',
+        builder: (context, state) {
+          final islandId = state.pathParameters['islandId']!;
+          return TopicListScreen(islandId: islandId);
+        },
+      ),
+      GoRoute(
+        path: '/levels/:topicId',
+        builder: (context, state) {
+          final topicId = state.pathParameters['topicId']!;
+          return LevelListScreen(topicId: topicId);
         },
       ),
       GoRoute(

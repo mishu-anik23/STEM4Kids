@@ -12,6 +12,7 @@ class Topic extends Equatable {
   final String? iconUrl;
   final String difficultyLevel;
   final int levelCount;
+  final bool? isUnlocked;
   final IslandProgress? userProgress;
 
   const Topic({
@@ -25,6 +26,7 @@ class Topic extends Equatable {
     this.iconUrl,
     required this.difficultyLevel,
     required this.levelCount,
+    this.isUnlocked,
     this.userProgress,
   });
 
@@ -43,6 +45,7 @@ class Topic extends Equatable {
       iconUrl: json['iconUrl'] as String?,
       difficultyLevel: json['difficultyLevel'] as String? ?? 'beginner',
       levelCount: json['levelCount'] as int? ?? 0,
+      isUnlocked: json['isUnlocked'] as bool?,
       userProgress: json['userProgress'] != null
           ? IslandProgress.fromJson(json['userProgress'] as Map<String, dynamic>)
           : null,
@@ -61,6 +64,7 @@ class Topic extends Equatable {
       if (iconUrl != null) 'iconUrl': iconUrl,
       'difficultyLevel': difficultyLevel,
       'levelCount': levelCount,
+      if (isUnlocked != null) 'isUnlocked': isUnlocked,
       if (userProgress != null) 'userProgress': userProgress!.toJson(),
     };
   }
@@ -77,6 +81,7 @@ class Topic extends Equatable {
         iconUrl,
         difficultyLevel,
         levelCount,
+        isUnlocked,
         userProgress,
       ];
 }
