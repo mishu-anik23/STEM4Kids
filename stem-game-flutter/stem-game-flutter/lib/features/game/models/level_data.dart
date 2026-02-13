@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'challenge_data.dart';
 
 enum QuestionType {
   multipleChoice,
@@ -19,6 +20,7 @@ class LevelData extends Equatable {
   final int totalQuestions;
   final int passingScore;
   final List<Question> questions;
+  final ChallengeData? challenge;
 
   const LevelData({
     required this.levelId,
@@ -32,9 +34,17 @@ class LevelData extends Equatable {
     required this.totalQuestions,
     required this.passingScore,
     required this.questions,
+    this.challenge,
   });
 
+  bool get isChallengeMode => challenge != null;
+
   factory LevelData.fromJson(Map<String, dynamic> json) {
+    ChallengeData? challenge;
+    if (json['challengeType'] != null && json['challengeConfig'] != null) {
+      challenge = ChallengeData.fromJson(json);
+    }
+
     return LevelData(
       levelId: json['levelId'] as int,
       worldId: json['worldId'] as int,
@@ -49,6 +59,7 @@ class LevelData extends Equatable {
       questions: (json['questions'] as List<dynamic>)
           .map((q) => Question.fromJson(q as Map<String, dynamic>))
           .toList(),
+      challenge: challenge,
     );
   }
 
@@ -81,6 +92,7 @@ class LevelData extends Equatable {
         totalQuestions,
         passingScore,
         questions,
+        challenge,
       ];
 }
 
