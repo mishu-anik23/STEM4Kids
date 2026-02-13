@@ -1,5 +1,5 @@
 const { sequelize } = require('../src/config/database');
-const { User, LevelProgress, Achievement, UserAchievement } = require('../src/models');
+const { User, LevelProgress, Achievement, UserAchievement, Island, Topic, Level, UserIslandProgress } = require('../src/models');
 
 async function migrate() {
   try {

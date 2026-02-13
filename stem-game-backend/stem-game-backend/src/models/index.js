@@ -3,6 +3,7 @@ const LevelProgress = require('./LevelProgress');
 const { Achievement, UserAchievement } = require('./Achievement');
 const Island = require('./Island');
 const Topic = require('./Topic');
+const Level = require('./Level');
 const UserIslandProgress = require('./UserIslandProgress');
 
 // Define associations
@@ -48,6 +49,28 @@ Island.hasMany(Topic, {
 Topic.belongsTo(Island, {
   foreignKey: 'islandId',
   as: 'island'
+});
+
+// Level associations
+Topic.hasMany(Level, {
+  foreignKey: 'topicId',
+  as: 'levels',
+  onDelete: 'CASCADE'
+});
+
+Level.belongsTo(Topic, {
+  foreignKey: 'topicId',
+  as: 'topic'
+});
+
+Level.hasMany(LevelProgress, {
+  foreignKey: 'levelId',
+  as: 'progress'
+});
+
+LevelProgress.belongsTo(Level, {
+  foreignKey: 'levelId',
+  as: 'levelData'
 });
 
 // UserIslandProgress associations
@@ -115,5 +138,6 @@ module.exports = {
   UserAchievement,
   Island,
   Topic,
+  Level,
   UserIslandProgress
 };
