@@ -1,8 +1,9 @@
 class User {
   final String id;
   final String username;
-  final int age;
-  final int grade;
+  final String userType;
+  final int? age;
+  final int? grade;
   final int coins;
   final int totalStars;
   final int currentWorld;
@@ -14,8 +15,9 @@ class User {
   User({
     required this.id,
     required this.username,
-    required this.age,
-    required this.grade,
+    this.userType = 'student',
+    this.age,
+    this.grade,
     required this.coins,
     required this.totalStars,
     required this.currentWorld,
@@ -25,10 +27,17 @@ class User {
     this.loginStreak = 0,
   });
 
+  // Helper getters for user type checking
+  bool get isStudent => userType == 'student';
+  bool get isTeacher => userType == 'teacher';
+  bool get isParent => userType == 'parent';
+  bool get hasUnrestrictedAccess => isTeacher || isParent;
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
       username: json['username'],
+      userType: json['userType'] ?? 'student',
       age: json['age'],
       grade: json['grade'],
       coins: json['coins'],
@@ -45,6 +54,7 @@ class User {
     return {
       'id': id,
       'username': username,
+      'userType': userType,
       'age': age,
       'grade': grade,
       'coins': coins,

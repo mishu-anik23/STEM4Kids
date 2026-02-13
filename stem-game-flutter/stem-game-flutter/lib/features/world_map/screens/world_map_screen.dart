@@ -55,7 +55,7 @@ class WorldMapScreen extends StatelessWidget {
                           subtitle: 'Ages 7-8',
                           icon: Icons.looks_two,
                           color: Colors.blue,
-                          isUnlocked: user.currentWorld >= 2,
+                          isUnlocked: user.hasUnrestrictedAccess || user.currentWorld >= 2,
                         ),
                         _buildWorldCard(
                           context,
@@ -64,7 +64,7 @@ class WorldMapScreen extends StatelessWidget {
                           subtitle: 'Ages 8-9',
                           icon: Icons.looks_3,
                           color: Colors.purple,
-                          isUnlocked: user.currentWorld >= 3,
+                          isUnlocked: user.hasUnrestrictedAccess || user.currentWorld >= 3,
                         ),
                         _buildWorldCard(
                           context,
@@ -73,7 +73,7 @@ class WorldMapScreen extends StatelessWidget {
                           subtitle: 'Ages 9-10',
                           icon: Icons.looks_4,
                           color: Colors.green,
-                          isUnlocked: user.currentWorld >= 4,
+                          isUnlocked: user.hasUnrestrictedAccess || user.currentWorld >= 4,
                         ),
                       ],
                     ),
@@ -113,9 +113,33 @@ class WorldMapScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    'Grade ${user.grade}',
-                    style: TextStyle(color: Colors.white70),
+                  Row(
+                    children: [
+                      if (user.grade != null)
+                        Text(
+                          'Grade ${user.grade}',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      if (user.isTeacher || user.isParent) ...[
+                        if (user.grade != null) SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: user.isTeacher ? Colors.blue[700] : Colors.purple[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            user.isTeacher ? 'TEACHER' : 'PARENT',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ],
               ),

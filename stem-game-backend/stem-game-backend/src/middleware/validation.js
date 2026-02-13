@@ -32,14 +32,21 @@ const registerValidation = [
     .isEmail()
     .normalizeEmail()
     .withMessage('Valid parent email is required'),
-  
+
   body('age')
+    .optional()
     .isInt({ min: 6, max: 10 })
     .withMessage('Age must be between 6 and 10'),
-  
+
   body('grade')
+    .optional()
     .isInt({ min: 1, max: 5 })
-    .withMessage('Grade must be between 1 and 5')
+    .withMessage('Grade must be between 1 and 5'),
+
+  body('userType')
+    .optional()
+    .isIn(['student', 'teacher', 'parent'])
+    .withMessage('User type must be student, teacher, or parent')
 ];
 
 // Login validation rules

@@ -120,7 +120,11 @@ exports.getLeaderboardByGrade = async (req, res) => {
     const { limit = 50 } = req.query;
 
     const users = await User.findAll({
-      where: { grade: parseInt(grade), isActive: true },
+      where: {
+        grade: parseInt(grade),
+        isActive: true,
+        userType: 'student' // Only include students in leaderboard
+      },
       attributes: ['id', 'username', 'avatarUrl', 'totalStars', 'grade'],
       order: [['totalStars', 'DESC']],
       limit: parseInt(limit)

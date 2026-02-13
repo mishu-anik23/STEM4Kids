@@ -23,19 +23,21 @@ class RegisterEvent extends AuthEvent {
   final String username;
   final String password;
   final String parentEmail;
-  final int age;
-  final int grade;
+  final int? age;
+  final int? grade;
+  final String userType;
 
   RegisterEvent({
     required this.username,
     required this.password,
     required this.parentEmail,
-    required this.age,
-    required this.grade,
+    this.age,
+    this.grade,
+    this.userType = 'student',
   });
 
   @override
-  List<Object?> get props => [username, password, parentEmail, age, grade];
+  List<Object?> get props => [username, password, parentEmail, age, grade, userType];
 }
 
 class LogoutEvent extends AuthEvent {}
@@ -109,6 +111,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         'parentEmail': event.parentEmail,
         'age': event.age,
         'grade': event.grade,
+        'userType': event.userType,
       });
 
       final user = User.fromJson(response['data']['user']);

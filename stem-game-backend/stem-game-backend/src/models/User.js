@@ -33,18 +33,32 @@ const User = sequelize.define('User', {
   },
   age: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     validate: {
       min: 6,
-      max: 10
+      max: 10,
+      isValidAge(value) {
+        // Only validate for student accounts
+        const userType = this.userType || this.getDataValue('userType');
+        if (userType === 'student' && (value === null || value === undefined)) {
+          throw new Error('Age is required for student accounts');
+        }
+      }
     }
   },
   grade: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     validate: {
       min: 1,
-      max: 5
+      max: 5,
+      isValidGrade(value) {
+        // Only validate for student accounts
+        const userType = this.userType || this.getDataValue('userType');
+        if (userType === 'student' && (value === null || value === undefined)) {
+          throw new Error('Grade is required for student accounts');
+        }
+      }
     }
   },
   avatarUrl: {
@@ -84,6 +98,15 @@ const User = sequelize.define('User', {
   parentVerified: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
+  },
+  userType: {
+    type: DataTypes.ENUM('student', 'teacher', 'parent'),
+    allowNull: false,
+    defaultValue: 'student',
+    field: 'user_type',
+    validate: {
+      isIn: [['student', 'teacher', 'parent']]
+    }
   },
   lastLoginAt: {
     type: DataTypes.DATE,
@@ -158,9 +181,9 @@ User.prototype.comparePassword = async function(candidatePassword) {
 User.prototype.updateLoginStreak = async function() {
   const today = new Date();
   const lastLogin = new Date(this.lastLoginAt);
-  
+
   const daysDiff = Math.floor((today - lastLogin) / (1000 * 60 * 60 * 24));
-  
+
   if (daysDiff === 1) {
     // Consecutive day login
     this.loginStreak += 1;
@@ -169,11 +192,28 @@ User.prototype.updateLoginStreak = async function() {
     this.loginStreak = 1;
   }
   // If same day, don't change streak
-  
+
   this.lastLoginAt = today;
   await this.save();
-  
+
   return this.loginStreak;
+};
+
+// Helper methods for user type checking
+User.prototype.isStudent = function() {
+  return this.userType === 'student';
+};
+
+User.prototype.isTeacher = function() {
+  return this.userType === 'teacher';
+};
+
+User.prototype.isParent = function() {
+  return this.userType === 'parent';
+};
+
+User.prototype.hasUnrestrictedAccess = function() {
+  return this.userType === 'teacher' || this.userType === 'parent';
 };
 
 module.exports = User;

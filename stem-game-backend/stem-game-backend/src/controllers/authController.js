@@ -24,7 +24,25 @@ const generateRefreshToken = (userId) => {
 // Register new user
 exports.register = async (req, res) => {
   try {
-    const { username, password, parentEmail, age, grade } = req.body;
+    const { username, password, parentEmail, age, grade, userType = 'student' } = req.body;
+
+    // Validate userType
+    if (!['student', 'teacher', 'parent'].includes(userType)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid user type. Must be student, teacher, or parent.'
+      });
+    }
+
+    // Conditional validation for student accounts
+    if (userType === 'student') {
+      if (!age || !grade) {
+        return res.status(400).json({
+          success: false,
+          message: 'Age and grade are required for student accounts'
+        });
+      }
+    }
 
     // Check if username already exists
     const existingUser = await User.findOne({ where: { username } });
@@ -40,8 +58,10 @@ exports.register = async (req, res) => {
       username,
       password,
       parentEmail,
-      age,
-      grade
+      age: userType === 'student' ? age : null,
+      grade: userType === 'student' ? grade : null,
+      userType,
+      currentWorld: userType !== 'student' ? 4 : 1 // Unlock all worlds for teachers/parents
     });
 
     // Generate tokens
@@ -65,6 +85,7 @@ exports.register = async (req, res) => {
         user: {
           id: user.id,
           username: user.username,
+          userType: user.userType,
           age: user.age,
           grade: user.grade,
           coins: user.coins,
@@ -140,6 +161,7 @@ exports.login = async (req, res) => {
         user: {
           id: user.id,
           username: user.username,
+          userType: user.userType,
           age: user.age,
           grade: user.grade,
           coins: user.coins,

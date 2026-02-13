@@ -108,10 +108,12 @@ exports.submitLevelCompletion = async (req, res) => {
 
     await transaction.commit();
 
-    // Update leaderboard (async, don't wait)
+    // Update leaderboard (async, don't wait) - only for students
     const user = await User.findByPk(userId);
-    leaderboardHelpers.updateScore(userId, user.totalStars, 'global');
-    leaderboardHelpers.updateScore(userId, user.totalStars, 'weekly');
+    if (user.userType === 'student') {
+      leaderboardHelpers.updateScore(userId, user.totalStars, 'global');
+      leaderboardHelpers.updateScore(userId, user.totalStars, 'weekly');
+    }
 
     // Check for achievements (async)
     checkAndUnlockAchievements(userId);

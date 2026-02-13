@@ -17,6 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _parentEmailController = TextEditingController();
   final _ageController = TextEditingController();
   final _gradeController = TextEditingController();
+  String _selectedUserType = 'student';
 
   @override
   void dispose() {
@@ -35,8 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           username: _usernameController.text,
           password: _passwordController.text,
           parentEmail: _parentEmailController.text,
-          age: int.parse(_ageController.text),
-          grade: int.parse(_gradeController.text),
+          age: _selectedUserType == 'student' ? int.tryParse(_ageController.text) : null,
+          grade: _selectedUserType == 'student' ? int.tryParse(_gradeController.text) : null,
+          userType: _selectedUserType,
         ),
       );
     }
@@ -99,6 +101,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 32),
 
+                      // User Type Selector
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: DropdownButton<String>(
+                          value: _selectedUserType,
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'student',
+                              child: Text('Student Account'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'teacher',
+                              child: Text('Teacher Account'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'parent',
+                              child: Text('Parent Account'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedUserType = value!;
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+
                       // Username field
                       TextFormField(
                         controller: _usernameController,
@@ -160,33 +196,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Age field
-                      TextFormField(
-                        controller: _ageController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Age',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                      // Age and Grade fields - only show for students
+                      if (_selectedUserType == 'student') ...[
+                        // Age field
+                        TextFormField(
+                          controller: _ageController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Age',
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter age';
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter age';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                        const SizedBox(height: 16),
 
-                      // Grade field
-                      TextFormField(
-                        controller: _gradeController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Grade',
+                        // Grade field
+                        TextFormField(
+                          controller: _gradeController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Grade',
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -200,6 +238,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
+                      ],
+
                       const SizedBox(height: 24),
 
                       // Register button

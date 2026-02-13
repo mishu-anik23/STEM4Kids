@@ -52,7 +52,14 @@ exports.getWorldIslands = async (req, res) => {
     // Check unlock status for each island
     const islandsWithUnlockStatus = islands.map(island => {
       const progress = progressMap[island.id];
-      const isUnlocked = checkIslandUnlocked(island, islands, progressMap);
+
+      // Teachers and Parents have unrestricted access to all islands
+      let isUnlocked;
+      if (req.user && req.user.hasUnrestrictedAccess()) {
+        isUnlocked = true;
+      } else {
+        isUnlocked = checkIslandUnlocked(island, islands, progressMap);
+      }
 
       return {
         ...island.toJSON(),
