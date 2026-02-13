@@ -424,18 +424,19 @@ exports.getLevelDetails = async (req, res) => {
     }
 
     // Transform level data to match Flutter LevelData format
-    // TODO: Update Flutter to use new challenge-based structure
+    // Includes both legacy question fields and new challenge fields
     const transformedLevel = {
-      levelId: level.levelNumber,  // Using levelNumber as int for compatibility
+      // Legacy compatibility fields
+      levelId: level.levelNumber,
       worldId: level.topic.island.worldId,
       title: level.name,
       description: level.description || '',
       difficulty: level.difficultyLevel || 'beginner',
       theme: level.topic.name || 'general',
       mathType: level.challengeType || 'general',
-      targetGrade: [1, 2],  // Default grades for now
-      totalQuestions: 1,  // Placeholder
-      passingScore: 70,  // Placeholder
+      targetGrade: [1, 2],
+      totalQuestions: 1,
+      passingScore: 70,
       questions: [
         {
           id: '1',
@@ -450,7 +451,19 @@ exports.getLevelDetails = async (req, res) => {
             coinsRequired: 10 * (index + 1)
           }))
         }
-      ]
+      ],
+
+      // New challenge fields for Flutter challenge-based rendering
+      challengeType: level.challengeType,
+      challengeConfig: level.challengeConfig,
+      storyText: level.storyText,
+      lessonContent: level.lessonContent,
+      hints: level.hints || [],
+      successMessage: level.successMessage,
+      maxStars: level.maxStars,
+      xpReward: level.xpReward,
+      coinsReward: level.coinsReward,
+      estimatedDurationMinutes: level.estimatedDurationMinutes,
     };
 
     res.json({
