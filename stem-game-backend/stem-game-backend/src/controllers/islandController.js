@@ -423,28 +423,48 @@ exports.getLevelDetails = async (req, res) => {
       });
     }
 
+    // Transform level data to match Flutter LevelData format
+    // TODO: Update Flutter to use new challenge-based structure
+    const transformedLevel = {
+      levelId: level.levelNumber,  // Using levelNumber as int for compatibility
+      worldId: level.topic.island.worldId,
+      title: level.name,
+      description: level.description || '',
+      difficulty: level.difficultyLevel || 'beginner',
+      theme: level.topic.name || 'general',
+      mathType: level.challengeType || 'general',
+      targetGrade: [1, 2],  // Default grades for now
+      totalQuestions: 1,  // Placeholder
+      passingScore: 70,  // Placeholder
+      questions: [
+        {
+          id: '1',
+          type: 'multipleChoice',
+          questionText: level.storyText || 'Complete the challenge',
+          correctAnswer: 'A',
+          options: ['Option A', 'Option B', 'Option C'],
+          explanation: level.lessonContent || '',
+          hints: (level.hints || []).map((hint, index) => ({
+            level: index + 1,
+            text: hint,
+            coinsRequired: 10 * (index + 1)
+          }))
+        }
+      ]
+    };
+
     res.json({
       success: true,
-      data: {
-        level: {
-          ...level.toJSON(),
-          topic: {
-            id: level.topic.id,
-            code: level.topic.code,
-            name: level.topic.name
-          },
-          island: level.topic.island
-        },
-        userProgress: userProgress ? {
-          completed: userProgress.completed,
-          stars: userProgress.stars,
-          score: userProgress.score,
-          attempts: userProgress.attempts,
-          timeSpentSeconds: userProgress.timeSpentSeconds,
-          completedAt: userProgress.completedAt,
-          hintsUsed: userProgress.hintsUsed
-        } : null
-      }
+      data: transformedLevel,
+      userProgress: userProgress ? {
+        completed: userProgress.completed,
+        stars: userProgress.stars,
+        score: userProgress.score,
+        attempts: userProgress.attempts,
+        timeSpentSeconds: userProgress.timeSpentSeconds,
+        completedAt: userProgress.completedAt,
+        hintsUsed: userProgress.hintsUsed
+      } : null
     });
   } catch (error) {
     console.error('Error fetching level details:', error);
