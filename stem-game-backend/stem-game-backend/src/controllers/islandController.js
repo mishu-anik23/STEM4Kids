@@ -167,6 +167,7 @@ exports.getIslandTopics = async (req, res) => {
         island: {
           id: island.id,
           code: island.code,
+          worldId: island.worldId,
           name: island.name,
           description: island.description,
           topicCategory: island.topicCategory
