@@ -42,32 +42,36 @@ class WorldMapScreen extends StatelessWidget {
                         _buildWorldCard(
                           context,
                           worldId: 1,
-                          title: 'Math Island',
-                          icon: Icons.calculate,
+                          title: 'World 1',
+                          subtitle: 'Ages 6-7',
+                          icon: Icons.looks_one,
                           color: Colors.orange,
                           isUnlocked: true,
                         ),
                         _buildWorldCard(
                           context,
                           worldId: 2,
-                          title: 'Physics Planet',
-                          icon: Icons.science,
+                          title: 'World 2',
+                          subtitle: 'Ages 7-8',
+                          icon: Icons.looks_two,
                           color: Colors.blue,
                           isUnlocked: user.currentWorld >= 2,
                         ),
                         _buildWorldCard(
                           context,
                           worldId: 3,
-                          title: 'Chemistry Kingdom',
-                          icon: Icons.science_outlined,
+                          title: 'World 3',
+                          subtitle: 'Ages 8-9',
+                          icon: Icons.looks_3,
                           color: Colors.purple,
                           isUnlocked: user.currentWorld >= 3,
                         ),
                         _buildWorldCard(
                           context,
                           worldId: 4,
-                          title: 'Nature Realm',
-                          icon: Icons.eco,
+                          title: 'World 4',
+                          subtitle: 'Ages 9-10',
+                          icon: Icons.looks_4,
                           color: Colors.green,
                           isUnlocked: user.currentWorld >= 4,
                         ),
@@ -165,6 +169,7 @@ class WorldMapScreen extends StatelessWidget {
     BuildContext context, {
     required int worldId,
     required String title,
+    required String subtitle,
     required IconData icon,
     required Color color,
     required bool isUnlocked,
@@ -201,7 +206,7 @@ class WorldMapScreen extends StatelessWidget {
               ),
             ),
 
-            // Title
+            // Title and subtitle
             Positioned(
               bottom: 0,
               left: 0,
@@ -215,14 +220,27 @@ class WorldMapScreen extends StatelessWidget {
                     bottomRight: Radius.circular(20),
                   ),
                 ),
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
