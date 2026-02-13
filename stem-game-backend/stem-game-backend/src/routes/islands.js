@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const islandController = require('../controllers/islandController');
-const { protect } = require('../middleware/auth');
+const { auth } = require('../middleware/auth');
 
 /**
  * @route   GET /api/islands/:worldId
@@ -29,6 +29,6 @@ router.get('/topics/:topicId/levels', islandController.getTopicLevels);
  * @desc    Get user's progress across all islands
  * @access  Private (requires authentication)
  */
-router.get('/progress/islands/:userId', protect, islandController.getUserIslandProgress);
+router.get('/progress/islands/:userId', auth, islandController.getUserIslandProgress);
 
 module.exports = router;

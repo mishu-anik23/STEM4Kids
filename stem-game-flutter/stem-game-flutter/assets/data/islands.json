@@ -2,7 +2,7 @@
   "islands": [
     {
       "id": "island_w1_physics",
-      "code": "world_1_physics",
+      "code": "island_w1_physics",
       "worldId": 1,
       "name": "Physics Island",
       "description": "Explore the wonders of light, shadows, and forces!",
@@ -14,7 +14,7 @@
     },
     {
       "id": "island_w1_chemistry",
-      "code": "world_1_chemistry",
+      "code": "island_w1_chemistry",
       "worldId": 1,
       "name": "Materials Island",
       "description": "Discover different materials and their properties!",
@@ -22,14 +22,14 @@
       "orderIndex": 2,
       "iconUrl": "assets/images/islands/materials_island.png",
       "unlockRequirements": {
-        "previousIsland": "world_1_physics",
+        "previousIsland": "island_w1_physics",
         "minStars": 10
       },
       "isActive": true
     },
     {
       "id": "island_w1_math",
-      "code": "world_1_math",
+      "code": "island_w1_math",
       "worldId": 1,
       "name": "Math Island",
       "description": "Master numbers, counting, and simple arithmetic!",
@@ -41,7 +41,7 @@
     },
     {
       "id": "island_w1_nature",
-      "code": "world_1_nature",
+      "code": "island_w1_nature",
       "worldId": 1,
       "name": "Nature Island",
       "description": "Learn about plants, animals, and the natural world!",
@@ -49,7 +49,7 @@
       "orderIndex": 4,
       "iconUrl": "assets/images/islands/nature_island.png",
       "unlockRequirements": {
-        "previousIsland": "world_1_math",
+        "previousIsland": "island_w1_math",
         "minStars": 10
       },
       "isActive": true

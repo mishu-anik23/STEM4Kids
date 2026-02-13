@@ -15,6 +15,7 @@ const { redisClient } = require('./config/redis');
 const authRoutes = require('./routes/authRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const islandRoutes = require('./routes/islands');
 
 // Initialize Express app
 const app = express();
@@ -66,6 +67,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/islands', islandRoutes);
 
 // Socket.io for real-time leaderboard updates
 io.on('connection', (socket) => {
@@ -124,11 +126,12 @@ const startServer = async () => {
     console.log('✅ Database connection established successfully');
     
     // Sync database models (in development)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Syncing database models...');
-      await sequelize.sync({ alter: true });
-      console.log('✅ Database models synchronized');
-    }
+    // Disabled because we're using migrations now
+    // if (process.env.NODE_ENV === 'development') {
+    //   console.log('Syncing database models...');
+    //   await sequelize.sync({ alter: true });
+    //   console.log('✅ Database models synchronized');
+    // }
 
     console.log(`Attempting to listen on port ${PORT}...`);
     // Start server
