@@ -11,6 +11,7 @@ enum QuestionType {
 class LevelData extends Equatable {
   final int levelId;
   final int worldId;
+  final String? topicId;
   final String title;
   final String description;
   final String difficulty;
@@ -25,6 +26,7 @@ class LevelData extends Equatable {
   const LevelData({
     required this.levelId,
     required this.worldId,
+    this.topicId,
     required this.title,
     required this.description,
     required this.difficulty,
@@ -48,6 +50,7 @@ class LevelData extends Equatable {
     return LevelData(
       levelId: json['levelId'] as int,
       worldId: json['worldId'] as int,
+      topicId: json['topicId'] as String?,
       title: json['title'] as String,
       description: json['description'] as String,
       difficulty: json['difficulty'] as String,
@@ -83,6 +86,7 @@ class LevelData extends Equatable {
   List<Object?> get props => [
         levelId,
         worldId,
+        topicId,
         title,
         description,
         difficulty,

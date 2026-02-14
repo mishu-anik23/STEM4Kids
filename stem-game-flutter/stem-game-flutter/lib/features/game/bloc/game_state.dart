@@ -110,6 +110,7 @@ class LevelCompleted extends GameState {
   final bool isNewBest;
   final int worldId;
   final String levelId;
+  final String? topicId;
 
   LevelCompleted({
     required this.finalScore,
@@ -120,6 +121,7 @@ class LevelCompleted extends GameState {
     required this.isNewBest,
     required this.worldId,
     required this.levelId,
+    this.topicId,
   });
 
   @override
@@ -132,6 +134,7 @@ class LevelCompleted extends GameState {
         isNewBest,
         worldId,
         levelId,
+        topicId,
       ];
 }
 

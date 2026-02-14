@@ -222,7 +222,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                         ),
                       ),
                       child: const Text(
-                        'Back to Levels',
+                        'Back to Topics',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -234,8 +234,13 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigate back to world screen to pick next level
-                        context.go('/world/${widget.levelCompleted.worldId}');
+                        final topicId = widget.levelCompleted.topicId;
+                        if (topicId != null) {
+                          // Navigate to level list where next level is unlocked
+                          context.go('/levels/$topicId?worldId=${widget.levelCompleted.worldId}');
+                        } else {
+                          context.go('/world/${widget.levelCompleted.worldId}');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -246,7 +251,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                         ),
                       ),
                       child: const Text(
-                        'Continue',
+                        'Next Level',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

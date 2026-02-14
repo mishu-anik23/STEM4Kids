@@ -193,6 +193,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       isNewBest: true,
       worldId: _currentSession!.worldId,
       levelId: _currentSession!.levelId,
+      topicId: _currentLevelData?.topicId,
     ));
   }
 
@@ -254,6 +255,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       isNewBest: true,
       worldId: _challengeSession!.worldId,
       levelId: _challengeSession!.levelId,
+      topicId: _currentLevelData?.topicId,
     ));
   }
 

@@ -429,6 +429,7 @@ exports.getLevelDetails = async (req, res) => {
       // Legacy compatibility fields
       levelId: level.levelNumber,
       worldId: level.topic.island.worldId,
+      topicId: level.topicId,
       title: level.name,
       description: level.description || '',
       difficulty: level.difficultyLevel || 'beginner',
