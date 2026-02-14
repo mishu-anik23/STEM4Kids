@@ -52,7 +52,7 @@ class _GameScreenState extends State<GameScreen> {
         child: BlocConsumer<GameBloc, GameState>(
           listener: (context, state) {
             if (state is LevelCompleted) {
-              context.push('/level-complete', extra: state);
+              context.go('/level-complete', extra: state);
             }
             if (state is ChallengeHintDisplayed) {
               _showChallengeHintDialog(state);
