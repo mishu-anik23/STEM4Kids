@@ -111,6 +111,7 @@ class LevelCompleted extends GameState {
   final int worldId;
   final String levelId;
   final String? topicId;
+  final String? nextLevelId;
 
   LevelCompleted({
     required this.finalScore,
@@ -122,6 +123,7 @@ class LevelCompleted extends GameState {
     required this.worldId,
     required this.levelId,
     this.topicId,
+    this.nextLevelId,
   });
 
   @override
@@ -135,6 +137,7 @@ class LevelCompleted extends GameState {
         worldId,
         levelId,
         topicId,
+        nextLevelId,
       ];
 }
 

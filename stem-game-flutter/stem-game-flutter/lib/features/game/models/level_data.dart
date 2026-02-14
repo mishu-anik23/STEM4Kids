@@ -22,6 +22,7 @@ class LevelData extends Equatable {
   final int passingScore;
   final List<Question> questions;
   final ChallengeData? challenge;
+  final String? nextLevelId;
 
   const LevelData({
     required this.levelId,
@@ -37,6 +38,7 @@ class LevelData extends Equatable {
     required this.passingScore,
     required this.questions,
     this.challenge,
+    this.nextLevelId,
   });
 
   bool get isChallengeMode => challenge != null;
@@ -63,6 +65,7 @@ class LevelData extends Equatable {
           .map((q) => Question.fromJson(q as Map<String, dynamic>))
           .toList(),
       challenge: challenge,
+      nextLevelId: json['nextLevelId'] as String?,
     );
   }
 
@@ -97,6 +100,7 @@ class LevelData extends Equatable {
         passingScore,
         questions,
         challenge,
+        nextLevelId,
       ];
 }
 

@@ -423,6 +423,15 @@ exports.getLevelDetails = async (req, res) => {
       });
     }
 
+    // Find the next level in the same topic
+    const nextLevel = await Level.findOne({
+      where: {
+        topicId: level.topicId,
+        levelNumber: level.levelNumber + 1
+      },
+      attributes: ['id']
+    });
+
     // Transform level data to match Flutter LevelData format
     // Includes both legacy question fields and new challenge fields
     const transformedLevel = {
@@ -465,6 +474,7 @@ exports.getLevelDetails = async (req, res) => {
       xpReward: level.xpReward,
       coinsReward: level.coinsReward,
       estimatedDurationMinutes: level.estimatedDurationMinutes,
+      nextLevelId: nextLevel ? nextLevel.id : null,
     };
 
     res.json({

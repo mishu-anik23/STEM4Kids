@@ -234,12 +234,19 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        final topicId = widget.levelCompleted.topicId;
-                        if (topicId != null) {
-                          // Navigate to level list where next level is unlocked
-                          context.go('/levels/$topicId?worldId=${widget.levelCompleted.worldId}');
+                        final nextLevelId = widget.levelCompleted.nextLevelId;
+                        final worldId = widget.levelCompleted.worldId;
+                        if (nextLevelId != null) {
+                          // Go directly to the next level
+                          context.go('/game/$worldId/$nextLevelId');
                         } else {
-                          context.go('/world/${widget.levelCompleted.worldId}');
+                          // Last level in topic - go back to level list
+                          final topicId = widget.levelCompleted.topicId;
+                          if (topicId != null) {
+                            context.go('/levels/$topicId?worldId=$worldId');
+                          } else {
+                            context.go('/world/$worldId');
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(

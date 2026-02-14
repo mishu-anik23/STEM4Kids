@@ -194,6 +194,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       worldId: _currentSession!.worldId,
       levelId: _currentSession!.levelId,
       topicId: _currentLevelData?.topicId,
+      nextLevelId: _currentLevelData?.nextLevelId,
     ));
   }
 
@@ -256,6 +257,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       worldId: _challengeSession!.worldId,
       levelId: _challengeSession!.levelId,
       topicId: _currentLevelData?.topicId,
+      nextLevelId: _currentLevelData?.nextLevelId,
     ));
   }
 
