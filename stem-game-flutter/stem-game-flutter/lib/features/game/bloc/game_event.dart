@@ -39,3 +39,28 @@ class NextQuestionEvent extends GameEvent {}
 class CompleteLevelEvent extends GameEvent {}
 
 class RestartLevelEvent extends GameEvent {}
+
+// --- New challenge-based events ---
+
+class StartChallengeEvent extends GameEvent {}
+
+class UpdateChallengeProgressEvent extends GameEvent {
+  final Map<String, dynamic> progressData;
+  final int currentScore;
+
+  UpdateChallengeProgressEvent(this.progressData, this.currentScore);
+
+  @override
+  List<Object?> get props => [progressData, currentScore];
+}
+
+class CompleteChallengeEvent extends GameEvent {
+  final Map<String, dynamic> results;
+
+  CompleteChallengeEvent(this.results);
+
+  @override
+  List<Object?> get props => [results];
+}
+
+class RequestChallengeHintEvent extends GameEvent {}

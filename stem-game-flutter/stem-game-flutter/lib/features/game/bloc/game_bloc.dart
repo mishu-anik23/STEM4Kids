@@ -2,8 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/repositories/level_repository.dart';
 import '../../../core/utils/score_calculator.dart';
 import '../../../core/utils/answer_validator.dart';
+import '../../../core/utils/challenge_scorer.dart';
 import '../models/level_data.dart';
 import '../models/game_session.dart';
+import '../models/challenge_session.dart';
 import 'game_event.dart';
 import 'game_state.dart';
 
@@ -11,14 +13,22 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   final LevelRepository levelRepository;
   LevelData? _currentLevelData;
   GameSession? _currentSession;
+  ChallengeSession? _challengeSession;
 
   GameBloc(this.levelRepository) : super(GameInitial()) {
+    // Legacy question-based handlers
     on<LoadLevelEvent>(_onLoadLevel);
     on<SubmitAnswerEvent>(_onSubmitAnswer);
     on<RequestHintEvent>(_onRequestHint);
     on<NextQuestionEvent>(_onNextQuestion);
     on<CompleteLevelEvent>(_onCompleteLevel);
     on<RestartLevelEvent>(_onRestartLevel);
+
+    // New challenge-based handlers
+    on<StartChallengeEvent>(_onStartChallenge);
+    on<UpdateChallengeProgressEvent>(_onUpdateChallengeProgress);
+    on<CompleteChallengeEvent>(_onCompleteChallenge);
+    on<RequestChallengeHintEvent>(_onRequestChallengeHint);
   }
 
   Future<void> _onLoadLevel(
@@ -41,6 +51,18 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
       _currentLevelData = levelData;
       _currentSession = session;
+
+      // Initialize challenge session if in challenge mode
+      if (levelData.isChallengeMode) {
+        _challengeSession = ChallengeSession(
+          worldId: event.worldId,
+          levelId: event.levelId,
+          challengeType: levelData.challenge!.challengeType,
+          startTime: DateTime.now(),
+        );
+      } else {
+        _challengeSession = null;
+      }
 
       emit(GameReady(levelData, session));
     } catch (e) {
@@ -183,5 +205,82 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     }
 
     add(LoadLevelEvent(_currentSession!.worldId, _currentSession!.levelId));
+  }
+
+  // --- Challenge-based handlers ---
+
+  Future<void> _onStartChallenge(
+    StartChallengeEvent event,
+    Emitter<GameState> emit,
+  ) async {
+    if (_currentLevelData == null || _challengeSession == null) return;
+    emit(ChallengeActive(_currentLevelData!, _challengeSession!));
+  }
+
+  Future<void> _onUpdateChallengeProgress(
+    UpdateChallengeProgressEvent event,
+    Emitter<GameState> emit,
+  ) async {
+    if (_currentLevelData == null || _challengeSession == null) return;
+
+    _challengeSession = _challengeSession!.copyWith(
+      score: event.currentScore,
+      progressData: event.progressData,
+    );
+
+    emit(ChallengeActive(_currentLevelData!, _challengeSession!));
+  }
+
+  Future<void> _onCompleteChallenge(
+    CompleteChallengeEvent event,
+    Emitter<GameState> emit,
+  ) async {
+    if (_currentLevelData == null || _challengeSession == null) return;
+
+    final score = ChallengeScorer.calculateScore(
+      _challengeSession!.challengeType,
+      event.results,
+    );
+    final stars = ChallengeScorer.calculateStars(score);
+    final coinsEarned =
+        ScoreCalculator.calculateCoins(stars, _challengeSession!.hintsUsed);
+
+    emit(LevelCompleted(
+      finalScore: score,
+      stars: stars,
+      coinsEarned: coinsEarned,
+      timeSpent: _challengeSession!.timeSpentSeconds,
+      hintsUsed: _challengeSession!.hintsUsed,
+      isNewBest: true,
+      worldId: _challengeSession!.worldId,
+      levelId: _challengeSession!.levelId,
+    ));
+  }
+
+  Future<void> _onRequestChallengeHint(
+    RequestChallengeHintEvent event,
+    Emitter<GameState> emit,
+  ) async {
+    if (_currentLevelData == null || _challengeSession == null) return;
+
+    final hints = _currentLevelData!.challenge?.hints ?? [];
+    final hintIndex = _challengeSession!.hintsUsed;
+
+    if (hintIndex >= hints.length || _challengeSession!.hintsRemaining <= 0) {
+      return;
+    }
+
+    _challengeSession = _challengeSession!.copyWith(
+      hintsUsed: _challengeSession!.hintsUsed + 1,
+      hintsRemaining: _challengeSession!.hintsRemaining - 1,
+    );
+
+    emit(ChallengeHintDisplayed(
+      hintText: hints[hintIndex],
+      hintIndex: hintIndex,
+      hintsRemaining: _challengeSession!.hintsRemaining,
+      levelData: _currentLevelData!,
+      session: _challengeSession!,
+    ));
   }
 }

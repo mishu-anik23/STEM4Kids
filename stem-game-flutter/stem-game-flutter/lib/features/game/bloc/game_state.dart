@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../models/level_data.dart';
 import '../models/game_session.dart';
+import '../models/challenge_session.dart';
 
 abstract class GameState extends Equatable {
   @override
@@ -131,6 +132,43 @@ class LevelCompleted extends GameState {
         isNewBest,
         worldId,
         levelId,
+      ];
+}
+
+// --- New challenge-based states ---
+
+class ChallengeActive extends GameState {
+  final LevelData levelData;
+  final ChallengeSession session;
+
+  ChallengeActive(this.levelData, this.session);
+
+  @override
+  List<Object?> get props => [levelData, session];
+}
+
+class ChallengeHintDisplayed extends GameState {
+  final String hintText;
+  final int hintIndex;
+  final int hintsRemaining;
+  final LevelData levelData;
+  final ChallengeSession session;
+
+  ChallengeHintDisplayed({
+    required this.hintText,
+    required this.hintIndex,
+    required this.hintsRemaining,
+    required this.levelData,
+    required this.session,
+  });
+
+  @override
+  List<Object?> get props => [
+        hintText,
+        hintIndex,
+        hintsRemaining,
+        levelData,
+        session,
       ];
 }
 
