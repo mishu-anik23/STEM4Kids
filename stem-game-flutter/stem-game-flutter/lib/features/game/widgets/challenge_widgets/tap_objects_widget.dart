@@ -22,7 +22,6 @@ class _TapObjectsWidgetState extends State<TapObjectsWidget> {
   late List<String> _targetObjects;
   late List<String> _distractorObjects;
   late List<String> _allObjects;
-  late int _minCorrect;
   final Set<String> _tappedCorrect = {};
   final Set<String> _tappedWrong = {};
   String? _lastTapped;
@@ -35,7 +34,6 @@ class _TapObjectsWidgetState extends State<TapObjectsWidget> {
         (widget.config['targetObjects'] as List<dynamic>).cast<String>();
     _distractorObjects =
         (widget.config['distractorObjects'] as List<dynamic>).cast<String>();
-    _minCorrect = widget.config['minCorrect'] as int? ?? _targetObjects.length;
 
     // Combine and shuffle
     _allObjects = [..._targetObjects, ..._distractorObjects];
@@ -60,9 +58,8 @@ class _TapObjectsWidgetState extends State<TapObjectsWidget> {
       }
     });
 
-    // Check completion
-    if (_tappedCorrect.length >= _minCorrect ||
-        _tappedCorrect.length >= _targetObjects.length) {
+    // Complete only when ALL targets are found
+    if (_tappedCorrect.length >= _targetObjects.length) {
       setState(() => _completed = true);
       Future.delayed(const Duration(milliseconds: 800), () {
         if (!mounted) return;

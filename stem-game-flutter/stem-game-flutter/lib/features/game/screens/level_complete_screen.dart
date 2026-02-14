@@ -234,8 +234,8 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigate back to level list to select next level
-                        Navigator.of(context).popUntil((route) => route.isFirst || route.settings.name?.contains('levels') == true);
+                        // Navigate back to world screen to pick next level
+                        context.go('/world/${widget.levelCompleted.worldId}');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
