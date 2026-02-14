@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'core/di/service_locator.dart';
 import 'core/routes/app_router.dart';
+import 'core/services/game_sound_service.dart';
 import 'core/themes/app_theme.dart';
 import 'features/auth/bloc/auth_bloc.dart';
 import 'features/progress/bloc/progress_bloc.dart';
@@ -24,6 +25,9 @@ void main() async {
 
   // Setup dependency injection
   await setupServiceLocator();
+
+  // Initialize game sound effects
+  await GameSoundService.init();
 
   runApp(const StemLearningGame());
 }
