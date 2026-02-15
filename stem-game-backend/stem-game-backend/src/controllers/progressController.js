@@ -1,4 +1,4 @@
-const { User, LevelProgress, Achievement, UserAchievement, Island, Topic, UserIslandProgress } = require('../models');
+const { User, Level, LevelProgress, Achievement, UserAchievement, Island, Topic, UserIslandProgress } = require('../models');
 const { leaderboardHelpers } = require('../config/redis');
 const { sequelize } = require('../config/database');
 
@@ -37,9 +37,31 @@ exports.submitLevelCompletion = async (req, res) => {
       });
     }
 
-    // Find or create progress record
+    // Resolve levelId: could be UUID (new challenge levels) or integer (legacy)
+    let levelNumber = levelId;
+    let topicId = null;
+    let islandId = null;
+    let xpReward = 0;
+
+    // Try to look up Level by UUID to get levelNumber, topicId, islandId
+    const levelRecord = await Level.findByPk(levelId, {
+      include: [{
+        model: Topic,
+        as: 'topic',
+        include: [{ model: Island, as: 'island', attributes: ['id'] }]
+      }]
+    });
+
+    if (levelRecord) {
+      levelNumber = levelRecord.levelNumber;
+      topicId = levelRecord.topicId;
+      islandId = levelRecord.topic?.island?.id || null;
+      xpReward = levelRecord.xpReward || 0;
+    }
+
+    // Find or create progress record using levelNumber (INTEGER)
     let progress = await LevelProgress.findOne({
-      where: { userId, worldId, levelId }
+      where: { userId, worldId, levelId: levelNumber }
     });
 
     let isNewCompletion = false;
@@ -48,10 +70,10 @@ exports.submitLevelCompletion = async (req, res) => {
     if (progress) {
       previousStars = progress.stars;
       
-      // Only update if new score is better
+      // Only update score/stars if new score is better
       if (stars > progress.stars || (stars === progress.stars && score > progress.score)) {
         const coinDifference = coinsEarned - progress.coinsEarned;
-        
+
         await progress.update({
           stars,
           score,
@@ -60,7 +82,10 @@ exports.submitLevelCompletion = async (req, res) => {
           hintsUsed: progress.hintsUsed + hintsUsed,
           completed: true,
           completedAt: new Date(),
-          coinsEarned
+          coinsEarned,
+          // Backfill topicId/islandId if missing from older records
+          topicId: progress.topicId || topicId,
+          islandId: progress.islandId || islandId,
         }, { transaction });
 
         // Update user stats
@@ -70,9 +95,12 @@ exports.submitLevelCompletion = async (req, res) => {
           totalStars: user.totalStars + (stars - previousStars)
         }, { transaction });
       } else {
-        // Just increment attempts
+        // Just increment attempts (score not better)
         await progress.update({
-          attempts: progress.attempts + 1
+          attempts: progress.attempts + 1,
+          // Backfill topicId/islandId if missing
+          topicId: progress.topicId || topicId,
+          islandId: progress.islandId || islandId,
         }, { transaction });
       }
     } else {
@@ -82,7 +110,9 @@ exports.submitLevelCompletion = async (req, res) => {
       progress = await LevelProgress.create({
         userId,
         worldId,
-        levelId,
+        levelId: levelNumber,
+        topicId,
+        islandId,
         stars,
         score,
         attempts: 1,
@@ -90,7 +120,11 @@ exports.submitLevelCompletion = async (req, res) => {
         hintsUsed,
         completed: true,
         completedAt: new Date(),
-        coinsEarned
+        coinsEarned,
+        xpEarned: xpReward,
+        firstTryBonus: true,
+        noHintsBonus: hintsUsed === 0,
+        masteryLevel: stars >= 3 ? 'mastered' : stars >= 2 ? 'practicing' : 'learning'
       }, { transaction });
 
       // Update user stats
@@ -99,7 +133,7 @@ exports.submitLevelCompletion = async (req, res) => {
         coins: user.coins + coinsEarned,
         totalStars: user.totalStars + stars,
         currentWorld: worldId,
-        currentLevel: Math.min(levelId + 1, 20)
+        currentLevel: Math.min(levelNumber + 1, 20)
       }, { transaction });
     }
 

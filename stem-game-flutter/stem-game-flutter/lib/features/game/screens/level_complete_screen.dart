@@ -93,7 +93,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
     return Scaffold(
       backgroundColor: Colors.orange.shade50,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +105,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               ScaleTransition(
                 scale: _starsAnimation,
                 child: Row(
@@ -116,26 +116,26 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Icon(
                         isEarned ? Icons.star : Icons.star_border,
-                        size: 80,
+                        size: 64,
                         color: isEarned ? Colors.amber : Colors.grey.shade300,
                       ),
                     );
                   }),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               Text(
                 message,
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
               Container(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -157,7 +157,7 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                           return Text(
                             '${_scoreAnimation.value}',
                             style: const TextStyle(
-                              fontSize: 32,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue,
                             ),
@@ -165,37 +165,37 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                         },
                       ),
                     ),
-                    const Divider(height: 32),
+                    const Divider(height: 24),
                     _buildStatRow(
                       'Coins Earned',
                       Text(
                         '${widget.levelCompleted.coinsEarned}',
                         style: const TextStyle(
-                          fontSize: 32,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.amber,
                         ),
                       ),
                     ),
-                    const Divider(height: 32),
+                    const Divider(height: 24),
                     _buildStatRow(
                       'Time',
                       Text(
                         '${widget.levelCompleted.timeSpent}s',
                         style: const TextStyle(
-                          fontSize: 28,
+                          fontSize: 24,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                     if (widget.levelCompleted.hintsUsed > 0) ...[
-                      const Divider(height: 32),
+                      const Divider(height: 24),
                       _buildStatRow(
                         'Hints Used',
                         Text(
                           '${widget.levelCompleted.hintsUsed}',
                           style: const TextStyle(
-                            fontSize: 28,
+                            fontSize: 24,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -204,9 +204,37 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                   ],
                 ),
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
               Row(
                 children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        // Replay the same level - score only updates if better
+                        final worldId = widget.levelCompleted.worldId;
+                        final levelId = widget.levelCompleted.levelId;
+                        context.go('/game/$worldId/$levelId');
+                      },
+                      icon: const Icon(Icons.replay, size: 20),
+                      label: const Text(
+                        'Replay',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.orange,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: const BorderSide(color: Colors.orange, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -215,32 +243,30 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.blue,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                           side: const BorderSide(color: Colors.blue, width: 2),
                         ),
                       ),
                       child: const Text(
-                        'Back to Topics',
+                        'Topics',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
                         final nextLevelId = widget.levelCompleted.nextLevelId;
                         final worldId = widget.levelCompleted.worldId;
                         if (nextLevelId != null) {
-                          // Go directly to the next level
                           context.go('/game/$worldId/$nextLevelId');
                         } else {
-                          // Last level in topic - go back to level list
                           final topicId = widget.levelCompleted.topicId;
                           if (topicId != null) {
                             context.go('/levels/$topicId?worldId=$worldId');
@@ -252,15 +278,15 @@ class _LevelCompleteScreenState extends State<LevelCompleteScreen>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                       child: const Text(
-                        'Next Level',
+                        'Next',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
