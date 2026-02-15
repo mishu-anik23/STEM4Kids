@@ -10,7 +10,11 @@
     "seed": "node database/seed.js",
     "seed:physics": "node scripts/seedPhysicsIsland.js",
     "verify:physics": "node scripts/verifyPhysicsData.js",
-    "test": "jest --coverage"
+    "test:api": "node scripts/restartAndTest.js",
+    "test": "jest --coverage",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ecosystem.config.js",
+    "start:script": "powershell -ExecutionPolicy Bypass -File scripts/start-server.ps1"
   },
   "keywords": [
     "education",
