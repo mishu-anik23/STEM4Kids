@@ -68,8 +68,8 @@ const levelCompletionValidation = [
     .withMessage('Invalid world ID'),
   
   body('levelId')
-    .isInt({ min: 1, max: 20 })
-    .withMessage('Invalid level ID'),
+    .notEmpty()
+    .withMessage('Level ID is required'),
   
   body('score')
     .isInt({ min: 0, max: 100 })
